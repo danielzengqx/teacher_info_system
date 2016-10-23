@@ -4,6 +4,7 @@
 from django.shortcuts import render, HttpResponse
 from django.conf import settings 
 from models import User
+from django.contrib.auth.models import User
 
 # Create your views here.
 def register(request):
@@ -14,6 +15,7 @@ def register(request):
 
 	return render(request,template, context)
 
+
 import uuid 
 def get_ref_id():
 	ref_id = str(uuid.uuid4())[:11].replace('-', '').lower()
@@ -23,20 +25,25 @@ def get_ref_id():
 	except:
 		return ref_id
 
-def signup(request):
-	# context = {'username':user_name}
-	template = "register.html"
-	print "here is post" , request.POST
+#daniel made
+# def signup(request):
+# 	# context = {'username':user_name}
+# 	template = "register.html"
+# 	print "here is post" , request.POST
 
-	user = User()
-	user.name = request.POST['user_name']
-	user.passwd = request.POST['password']
-	user.email = request.POST['email']
-	user.u_id = request.POST['uid']
+# 	user = User()
+# 	user.name = request.POST['user_name']
+# 	user.passwd = request.POST['password']
+# 	user.email = request.POST['email']
+# 	user.u_id = request.POST['uid']
+# 	user.save()
+
+def signup(request):
+	print request.POST
+	user = User.objects.create_user(request.POST['user_name'], request.POST['email'], request.POST['password'])
 	user.save()
 
-
-	return HttpResponse('daniel')
+	return HttpResponse(request.POST['user_name'])
 
 def success(request):
 	# questions_preview = [1,2,3,4,5]
