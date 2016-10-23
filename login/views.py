@@ -17,7 +17,8 @@ def auth(request):
 	user = authenticate(username=username, password=password)
 	if user is not None:
 		# return HttpResponse("Welcome")
-		return HttpResponseRedirect("http://localhost:8000/")
+		login(request, user)
+		return HttpResponseRedirect("http://192.168.1.102:8000/")
 	else:
 		return HttpResponseRedirect("http://localhost:8000/register")
 
