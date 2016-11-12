@@ -529,7 +529,17 @@
             3.5: 'label label-primary',
             4: 'label label-primary',
             4.5: 'label label-success',
-            5: 'label label-success'
+            5: 'label label-success',
+            5.5: 'label label-danger',
+            6: 'label label-danger',
+            6.5: 'label label-warning',
+            7: 'label label-warning',
+            7.5: 'label label-info',
+            8: 'label label-info',
+            8.5: 'label label-primary',
+            9: 'label label-primary',
+            9.5: 'label label-success',
+            10: 'label label-success'            
         },
         clearButton: '<i class="glyphicon glyphicon-minus-sign"></i>',
         clearButtonBaseClass: 'clear-rating',

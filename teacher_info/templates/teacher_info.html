@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>教师信息</title>
+</head>
+<body>
+	{% for t in teachers %}
+		<ul> 教师
+
+		<li>{{ t.name }} </li>
+		<li>{{ t.tid }} </li>
+		<li>{{ t.score1 }} </li>
+		<li>{{ t.score2 }} </li>
+		<li>{{ t.score3 }} </li>
+		<li>{{ t.score4 }} </li>
+
+		</ul>
+
+		
+
+	{% endfor %}
+</body>
+</html>

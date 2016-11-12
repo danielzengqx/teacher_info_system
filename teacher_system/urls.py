@@ -23,6 +23,8 @@ urlpatterns = [
     url(r'^register/',include('register.urls')),
     url(r'^login/',include('login.urls')),
     url(r'^rating/',include('rating.urls')),
+    url(r'^teacher_info/',include('teacher_info.urls')),
+
 
 
 

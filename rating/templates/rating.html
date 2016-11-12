@@ -55,10 +55,12 @@
 		  			{% csrf_token %}
 
 					<select class="selectpicker" name='m1' data-style="btn-success" >
-					  <optgroup label="专业1">
-					    <option value='t1'>教师1</option>
-					    <option value='t2'>教师2</option>
-					    <option value='t3'>教师3</option>
+					  <optgroup label="专业1">templates
+
+					    {% for t in teachers %}
+					    	<option value={{ t.tid }} >{{ t.name }} </option>
+
+					    {% endfor %}
 					  </optgroup>
 					  <optgroup label="专业2" name='m2'>
 					    <option value='t4'> 教师4</option>
@@ -72,16 +74,16 @@
 
 				  <div class="form-group" >
 					<label for="rating_0" class="control-label">1. 着装合理，治学严谨。严于律己，从不迟到早退:</label>
-					<input id="rating_0" name="rating_0" class="rating" data-min="0" data-max='5' data-step="0.5" data-language='zh'>
+					<input id="rating_0" name="rating_0" class="rating" data-min="0" data-max='10' data-step="1" data-language='zh'>
 
 					<label for="rating_1" class="control-label">2. 教学认真，授课内容详细，课堂效率高:</label>
-					<input id="rating_1" name="rating_1" class="rating" data-min="0" data-max="5" data-step="0.5" data-language='zh'>
+					<input id="rating_1" name="rating_1" class="rating" data-min="0" data-max="10" data-step="1" data-language='zh'>
 
 					<label for="rating_2" class="control-label">3. 教学方法多样，重点与难点内容区分清楚，讲解得当:</label>
-					<input id="rating_2" name="rating_2" class="rating" data-min="0" data-max="5" data-step="0.5" data-language='zh'>
+					<input id="rating_2" name="rating_2" class="rating" data-min="0" data-max="10" data-step="1" data-language='zh'>
 
 					<label for="rating_3" class="control-label">4. any more ?</label>
-					<input id="rating_3" name="rating_3" class="rating" data-min="0" data-max="5" data-step="0.5" data-language='zh'>
+					<input id="rating_3" name="rating_3" class="rating" data-min="0" data-max="10" data-step="1" data-language='zh'>
 
 					<hr class="colorgraph">
 					 <button type="submit" class="btn btn-default">提交</button>
