@@ -73,17 +73,10 @@
 					<p> 评分选项: </p>
 
 				  <div class="form-group" >
-					<label for="rating_0" class="control-label">1. 着装合理，治学严谨。严于律己，从不迟到早退:</label>
-					<input id="rating_0" name="rating_0" class="rating" data-min="0" data-max='10' data-step="1" data-language='zh'>
-
-					<label for="rating_1" class="control-label">2. 教学认真，授课内容详细，课堂效率高:</label>
-					<input id="rating_1" name="rating_1" class="rating" data-min="0" data-max="10" data-step="1" data-language='zh'>
-
-					<label for="rating_2" class="control-label">3. 教学方法多样，重点与难点内容区分清楚，讲解得当:</label>
-					<input id="rating_2" name="rating_2" class="rating" data-min="0" data-max="10" data-step="1" data-language='zh'>
-
-					<label for="rating_3" class="control-label">4. any more ?</label>
-					<input id="rating_3" name="rating_3" class="rating" data-min="0" data-max="10" data-step="1" data-language='zh'>
+				  	{% for content in score_contents %}
+						<label for={{  forloop.counter0 }} class="control-label"> {{ content }} </label>
+						<input id='rating_{{ forloop.counter0 }}' name='rating_{{ forloop.counter0 }}' class="rating" data-min="0" data-max='10' data-step="1" data-language='zh'>
+				  	{% endfor %}
 
 					<hr class="colorgraph">
 					 <button type="submit" class="btn btn-default">提交</button>

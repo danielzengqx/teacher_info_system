@@ -31,14 +31,23 @@ def rating(request):
 		teacher.score4 = s4
 		teacher.save()
 
-	teachers =  Teacher.objects.all()
-	for t in teachers:
-		print "here is teacher %s, name %s" %(t.tid, t.name)
 
+	teachers =  Teacher.objects.all()
+	# for teachers:
+	# print "here is teacher %s, name %s" %(t.tid, t.name)
+	score_contents = list()
+	score_contents.append(teachers[0].score1_content)
+	score_contents.append(teachers[0].score2_content)
+	score_contents.append(teachers[0].score3_content)
+	score_contents.append(teachers[0].score4_content)
+
+	for i in score_contents:
+		print i
 	template = "rating.html"
 	context = {"username": user, 
 				"email": email,
-				"teachers": teachers
+				"teachers": teachers,
+				"score_contents": score_contents
 				}
 
 
