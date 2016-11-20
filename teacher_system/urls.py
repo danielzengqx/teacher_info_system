@@ -24,18 +24,9 @@ urlpatterns = [
     url(r'^login/',include('login.urls')),
     url(r'^rating/',include('rating.urls')),
     url(r'^teacher_info/',include('teacher_info.urls')),
-
-
-
-
+    url(r'^logout/',include('logout.urls')),
+    url(r'^video/',include('video.urls')),
 
 
 ]
-
-
-# url(r'^teacher_info/',include('teacher_info.urls')),
-# url(r'^video/',include('video.urls')),
-# url(r'^comment/',include('comment.urls')),
-#url(r'^release/(?P<user_id>\w{28})/(?P<huodong_id>\w{10})$',  views.release, name='release'),
-
 

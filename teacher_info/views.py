@@ -14,7 +14,13 @@ def teacher_info(request):
 	for t in teachers:
 		print "here is teacher %s, name %s" %(t.tid, t.name)
 
-	template = "teacher_info.html"
+	# template = "teacher_info.html"
+	# template = "teacher_widget.html"
+	# template = "profile.html"
+	template = "user_profile.html"
+
+
+
 	context = {
 				"teachers": teachers
 				}

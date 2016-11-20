@@ -19,4 +19,6 @@ from . import views
 
 urlpatterns = [
     url(r'^$',views.rating, name='rating'),
+    url(r'^redirect',views.redirect, name='redirect'),
+
 ]

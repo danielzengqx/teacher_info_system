@@ -11,7 +11,9 @@ def myLogin(request):
 
 def auth(request):
 	print "here is auth\n"
-	print request.POST
+	if request.POST:
+		print "in post"
+		print request.POST
 	username = request.POST['user_name']
 	password = request.POST['password']
 	user = authenticate(username=username, password=password)

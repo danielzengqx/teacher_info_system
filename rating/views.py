@@ -3,7 +3,7 @@ from models import Teacher
 # Create your views here.
 from django.contrib.auth.decorators import login_required
 
-@login_required(login_url='/register/')
+@login_required(login_url='/rating/redirect/')
 def rating(request):
 	user = request.user.username
 	email = request.user.email
@@ -44,6 +44,7 @@ def rating(request):
 	for i in score_contents:
 		print i
 	template = "rating.html"
+
 	context = {"username": user, 
 				"email": email,
 				"teachers": teachers,
@@ -54,6 +55,15 @@ def rating(request):
 	return render(request, template, context)
 	# return HttpResponseRedirect("http://localhost:8000/")
 
+
+def redirect(request):
+	template = "redirect.html"
+
+	context = {
+				}
+
+
+	return render(request, template, context)
 
 import uuid 
 def get_ref_id():
