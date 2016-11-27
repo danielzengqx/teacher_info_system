@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
+    <title>留言板</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <style type="text/css">
+
+li.ui-state-default{
+    background:#fff0;
+    border:none;
+    border-bottom:1px solid #ddd;
+    text-align: left;
+    padding-bottom: 10px;
+}
+
+li.ui-state-default:last-child{
+    border-bottom:none;
+}
+
+/*@import url(http://fonts.googleapis.com/css?family=Roboto:400);
+body {
+  background-color:#fff;
+  -webkit-font-smoothing: antialiased;
+  font: normal 14px Roboto,arial,sans-serif;
+}
+*/
+/*.btn,.form-control,.well {
+    border-radius:1px;
+    box-shadow:0 0 0;
+}*/
+
+.form-control {
+    border-color:#d7d7d7;
+}
+
+.btn-primary {
+    border-color:transparent;
+}
+
+.btn-primary, .list-group-item.active:focus {
+    background-color:#4285f4;
+} 
+
+.btn-plus {
+    background-color:#ffffff;
+    border-width:1px;
+    border-color:#dddddd;
+    box-shadow:1px 1px 0 #999999;
+    border-radius:3px;color:#666666;
+    text-shadow:0 0 1px #bbbbbb;
+}
+
+/*.well,.panel {
+    border-color:#d2d2d2;
+    box-shadow:0 1px 0 #cfcfcf;
+    border-radius:3px;
+}*/
+
+/*hr {
+ border-color:#ececec;
+}
+*/
+button {
+ outline: 0;
+}
+
+.btn span{
+ color:#666666;
+}
+
+.list-group-item:first-child,.list-group-item:last-child {
+ border-radius:0;
+}
+
+/*h3 { 
+ border:0 solid #efefef; 
+ border-bottom-width:1px;
+ padding-bottom:10px;
+}*/
+
+.colorgraph {
+  height: 5px;
+  border-top: 0;
+  background: #c4e17f;
+  border-radius: 5px;
+  background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+}
+
+    </style>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <h2>有什么想说的吗？</h2>
+            <div class="input-group">
+                <input type="text" id="userComment" class="form-control input-sm chat-input" placeholder="在这写下你的留言..." />
+        	    <span class="input-group-btn" onclick="addComment()">     
+                    <a href="#" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-comment"></span>添加留言</a>
+                </span>
+            </div>
+            <hr class="colorgraph">
+            <ul data-brackets-id="12674" id="sortable" class="list-unstyled ui-sortable">
+                <strong class="pull-left primary-font">James</strong>
+                <small class="pull-right text-muted">
+                   <span class="glyphicon glyphicon-time"></span>7 mins ago</small>
+                </br>
+                <li class="ui-state-default">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </li>
+                </br>
+                 <strong class="pull-left primary-font">Taylor</strong>
+                <small class="pull-right text-muted">
+                   <span class="glyphicon glyphicon-time"></span>14 mins ago</small>
+                </br>
+                <li class="ui-state-default">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+function addComment(){
+    var userComment = document.getElementById("userComment").value;
+	document.getElementById("ui-state-default").innerHTML = userComment;
+}
+</script>
+</body>
+</html>

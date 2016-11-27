@@ -26,6 +26,8 @@ urlpatterns = [
     url(r'^teacher_info/',include('teacher_info.urls')),
     url(r'^logout/',include('logout.urls')),
     url(r'^video/',include('video.urls')),
+    url(r'^comment/',include('comment.urls')),
+
 
 
 ]

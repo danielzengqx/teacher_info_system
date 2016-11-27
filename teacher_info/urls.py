@@ -19,4 +19,6 @@ from . import views
 
 urlpatterns = [
     url(r'^$',views.teacher_info, name='teacher_info'),
+    url(r'^detail/(?P<tid>\d+)',views.teacher_detail, name='teacher_detail'),
+
 ]

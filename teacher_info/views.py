@@ -4,12 +4,6 @@ from rating.models import Teacher
 from django.contrib.auth.decorators import login_required
 
 def teacher_info(request):
-	# user = request.user.username
-	# email = request.user.email
-	# user = "test"
-	# email = "test@test.com"
-
-
 	teachers =  Teacher.objects.all()
 	for t in teachers:
 		print "here is teacher %s, name %s" %(t.tid, t.name)
@@ -40,3 +34,22 @@ def get_ref_id():
 		return ref_id
 
 
+def teacher_detail(request, tid):
+	teachers =  Teacher.objects.all()
+	for t in teachers:
+		print "here is teacher %s, name %s" %(t.tid, t.name)
+
+	# template = "teacher_info.html"
+	# template = "teacher_widget.html"
+	template = "profile.html"
+	# template = "user_profile.html"
+
+
+
+	context = {
+				"teachers": teachers
+				}
+
+
+	return render(request, template, context)
+	# return HttpResponseRedirect("http://localhost:8000/")
