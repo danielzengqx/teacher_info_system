@@ -47,38 +47,20 @@ video { font-size: 100%; line-height: 0; vertical-align: baseline; -webkit-user-
 <div class="container">
     <h2>视频展示</h2>
 	<hr class="colorgraph">
+	{% for t,v in video_all.iteritems %}
     <div class="row">
       	<div class="col-lg-12 col-sm-3 nopadding">
+      	    <h4>{{ t }} </h4>
 	        <div class="embed-responsive embed-responsive-16by9">
-	            <h4>学校介绍：</h4>
-		     	<video src="{% static 'video/sample.mp4' %}" controls="controls"  poster="{% static 'img/q.png' %}">
+		     	<video src="{% static 'video/' %}{{ v }}" controls="controls"  poster="{% static 'img/q.png' %}">
 				您的浏览器不支持 video 标签。
 				</video>
 			</div>
 		</div>
 	</div>
+	<hr>
+	{% endfor %}
 
-     <div class="row">
-      	<div class="col-lg-12 col-sm-3 nopadding">
-        	<h4>学校介绍：</h4>
-	        <div class="embed-responsive embed-responsive-16by9">
-		     	<video src="{% static 'video/sample.mp4' %}" controls="controls"  poster="{% static 'img/q.png' %}">
-				您的浏览器不支持 video 标签。
-				</video>
-			</div>
-		</div>
-	</div>
-
-    <div class="row">
-      	<div class="col-lg-12 col-sm-3 nopadding">
-        	<h4>学校介绍：</h4>
-	        <div class="embed-responsive embed-responsive-16by9">
-		     	<video src="{% static 'video/sample.mp4' %}" controls="controls"  poster="{% static 'img/q.png' %}">
-				您的浏览器不支持 video 标签。
-				</video>
-			</div>
-		</div>
-	</div>
 
     </div>
     
