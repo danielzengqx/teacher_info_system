@@ -7,6 +7,7 @@
     <title>Profile - Bootsnipp.com</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
     <style type="text/css">
         
 
@@ -508,7 +509,7 @@ opacity:0.9;
 
 
 /* skill meter in resume. copy pasted from http://bootsnipp.com/snippets/featured/progress-bar-meter */
-
+/*
 .progress-bar {
     text-align: left;
     white-space: nowrap;
@@ -564,22 +565,25 @@ opacity:0.9;
 .progress-meter > .meter.meter-right > .meter-text {
 	text-align: right;
 }
-
+*/
 
     
                         
 /**** resume ****/
+
     </style>
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+
+        <link href="{% static 'kartik-v-bootstrap-star-rating/css/star-rating.css' %}" media="all" rel="stylesheet" type="text/css" />
+
 </head>
 <body>
 
 
 
 <!-- nav bar -->
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container">
+<!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+ --><div class="container">
 <div class="row">
 <!--     <div class="col-sm-3">
         <a href="mail-compose.html" class="btn btn-danger btn-block btn-compose-email">Compose Email</a>
@@ -634,40 +638,13 @@ opacity:0.9;
                               <img class="img-circle img-responsive" alt="" src="{%static 'img/dog.jpeg' %}">
                            </figure>
                            <div class="row">
-<!--                               <div class="col-xs-12 social-btns">
-                                 <div class="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
-                                    <a href="#" class="btn btn-social btn-block btn-google">
-                                    <i class="fa fa-google"></i> </a>
-                                 </div>
-                                 <div class="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
-                                    <a href="#" class="btn btn-social btn-block btn-facebook">
-                                    <i class="fa fa-facebook"></i> </a>
-                                 </div>
-                                 <div class="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
-                                    <a href="#" class="btn btn-social btn-block btn-twitter">
-                                    <i class="fa fa-twitter"></i> </a>
-                                 </div>
-                                 <div class="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
-                                    <a href="#" class="btn btn-social btn-block btn-linkedin">
-                                    <i class="fa fa-linkedin"></i> </a>
-                                 </div>
-                                 <div class="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
-                                    <a href="#" class="btn btn-social btn-block btn-github">
-                                    <i class="fa fa-github"></i> </a>
-                                 </div>
-                                 <div class="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
-                                    <a href="#" class="btn btn-social btn-block btn-stackoverflow">
-                                    <i class="fa fa-stack-overflow"></i> </a>
-                                 </div>
-                              </div> -->
-                              
                               
                            </div>
                         </div>
                         <div class="col-xs-12 col-sm-8">
                            <ul class="list-group">
-                              <li class="list-group-item">John Doe</li>
-                              <li class="list-group-item">Software Engineer</li>
+                              <li class="list-group-item">{{ name }} </li>
+                              <li class="list-group-item">{{ major }} </li>
                               <li class="list-group-item">Google Inc. </li>
                               <li class="list-group-item"><i class="fa fa-phone"></i> 000-000-0000 </li>
                               <li class="list-group-item"><i class="fa fa-envelope"></i> john@example.com</li>
@@ -677,14 +654,8 @@ opacity:0.9;
                   </div>
                </div>
                <div class="bs-callout bs-callout-danger">
-                  <h4>Summary</h4>
-                  <p>
-                     Lorem ipsum dolor sit amet, ea vel prima adhuc, scripta liberavisse ea quo, te vel vidit mollis complectitur. Quis verear mel ne. Munere vituperata vis cu, 
-                     te pri duis timeam scaevola, nam postea diceret ne. Cum ex quod aliquip mediocritatem, mei habemus persecuti mediocritatem ei.
-                  </p>
-                  <p>
-                     Odio recteque expetenda eum ea, cu atqui maiestatis cum. Te eum nibh laoreet, case nostrud nusquam an vis. 
-                     Clita debitis apeirian et sit, integre iudicabit elaboraret duo ex. Nihil causae adipisci id eos.
+                  <h4>简介：</h4>
+                  <p>{{ intro }}
                   </p>
                </div>
                <div class="bs-callout bs-callout-danger">
@@ -742,58 +713,32 @@ opacity:0.9;
                   </ul>
                </div>
                <div class="bs-callout bs-callout-danger">
-                  <h4>Language and Platform Skills</h4>
+                  <h4>各项评分</h4>
                   <ul class="list-group">
                      <a class="list-group-item inactive-link" href="#">
-                        <div class="progress">
-                           <div data-placement="top" style="width: 80%;" 
-                              aria-valuemax="100" aria-valuemin="0" aria-valuenow="80" role="progressbar" class="progress-bar progress-bar-success">
-                              <span class="sr-only">80%</span>
-                              <span class="progress-type">Java/ JavaEE/ Spring Framework </span>
-                           </div>
+                     <label class="control-label" >{{ score1_content }} </label>  
+                      <div class="rating-container rating-md rating-animate">
+                        <div class="rating">
+                          <span class="empty-stars">
+                            <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                          </span>
+                          <span class="filled-stars" style="width: 100%;">
+                            <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                          </span>
                         </div>
-                        <div class="progress">
-                           <div data-placement="top" style="width: 70%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="1" role="progressbar" class="progress-bar progress-bar-success">
-                              <span class="sr-only">70%</span>
-                              <span class="progress-type">PHP/ Lamp Stack</span>
-                           </div>
+                        <div class="caption">
+                          <span class="label label-success">十星</span>
                         </div>
-                        <div class="progress">
-                           <div data-placement="top" style="width: 70%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="1" role="progressbar" class="progress-bar progress-bar-success">
-                              <span class="sr-only">70%</span>
-                              <span class="progress-type">JavaScript/ NodeJS/ MEAN stack </span>
-                           </div>
-                        </div>
-                        <div class="progress">
-                           <div data-placement="top" style="width: 65%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="1" role="progressbar" class="progress-bar progress-bar-warning">
-                              <span class="sr-only">65%</span>
-                              <span class="progress-type">Python/ Numpy/ Scipy</span>
-                           </div>
-                        </div>
-                        <div class="progress">
-                           <div data-placement="top" style="width: 60%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="60" role="progressbar" class="progress-bar progress-bar-warning">
-                              <span class="sr-only">60%</span>
-                              <span class="progress-type">C</span>
-                           </div>
-                        </div>
-                        <div class="progress">
-                           <div data-placement="top" style="width: 50%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" role="progressbar" class="progress-bar progress-bar-warning">
-                              <span class="sr-only">50%</span>
-                              <span class="progress-type">C++</span>
-                           </div>
-                        </div>
-                        <div class="progress">
-                           <div data-placement="top" style="width: 10%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" role="progressbar" class="progress-bar progress-bar-danger">
-                              <span class="sr-only">10%</span>
-                              <span class="progress-type">Go</span>
-                           </div>
-                        </div>
-                        <div class="progress-meter">
-                           <div style="width: 25%;" class="meter meter-left"><span class="meter-text">I suck</span></div>
-                           <div style="width: 25%;" class="meter meter-left"><span class="meter-text">I know little</span></div>
-                           <div style="width: 30%;" class="meter meter-right"><span class="meter-text">I'm a guru</span></div>
-                           <div style="width: 20%;" class="meter meter-right"><span class="meter-text">I''m good</span></div>
-                        </div>
+                      </div>
+
                      </a>
                   </ul>
                </div>
@@ -828,6 +773,18 @@ opacity:0.9;
     </div>
 </div>
 </div>
+
+    <script src="{% static 'js/jquery.js' %}"></script>
+
+    <!-- important mandatory libraries -->
+    <script src="{% static 'kartik-v-bootstrap-star-rating/js/star-rating.js' %}" type="text/javascript"></script>
+
+    <!-- optionally if you need translation for your language then include locale file as mentioned below -->
+    <script src="{% static 'kartik-v-bootstrap-star-rating/js/locales/zh.js' %}" type="text/javascript"></script>
+
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script type="text/javascript">
 
 </script>
