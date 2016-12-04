@@ -5,7 +5,7 @@
     <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
     <title>用户登录</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <style type="text/css">
         /* Credit to bootsnipp.com for the css for the color graph */
 .colorgraph {
@@ -40,7 +40,7 @@
 				<span class="button-checkbox">
 					<button type="button" class="btn" data-color="info">记住我</button>
                     <input type="checkbox" name="remember_me" id="remember_me" checked="checked" class="hidden">
-					<a href="http://localhost:8000/forgetpasswd" class="btn btn-link pull-right">忘记密码?</a>
+					<a href="/forgetpasswd" class="btn btn-link pull-right">忘记密码?</a>
 				</span>
 				<hr class="colorgraph">
 				<div class="row">
