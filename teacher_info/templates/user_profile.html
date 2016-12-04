@@ -6,7 +6,7 @@
     <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
     <title>User Profile Widget - Bootsnipp.com</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{% 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <style type="text/css">
         body{padding-top:30px;}
 
@@ -35,7 +35,7 @@ color: #999;
                     <div class="col-sm-6 col-md-8">
                         <h4>
                             {{ t.name }}</h4>
-                        <small><cite title="San Francisco, USA">{{ t.tid }} <i class="glyphicon glyphicon-map-marker">
+                        <small><cite title="San Francisco, USA">{{ t.tid }}, {{ t.score1 }} <i class="glyphicon glyphicon-map-marker">
                         </i></cite></small>
                         <p>
                             <i class="glyphicon glyphicon-envelope"></i>email@example.com

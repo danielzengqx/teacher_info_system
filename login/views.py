@@ -20,8 +20,8 @@ def auth(request):
 	if user is not None:
 		# return HttpResponse("Welcome")
 		login(request, user)
-		return HttpResponseRedirect("http://localhost:8000/")
+		return HttpResponseRedirect("/")
 	else:
-		return HttpResponseRedirect("http://localhost:8000/register")
+		return HttpResponseRedirect("/register")
 
 
