@@ -56,6 +56,7 @@ def rating(request):
 		teacher.score10 = (teacher.score10 + s10) / teacher.score10_count
 
 		teacher.save()
+		return HttpResponseRedirect("/")
 
 
 	teachers =  Teacher.objects.all()
@@ -86,7 +87,6 @@ def rating(request):
 
 
 	return render(request, template, context)
-	# return HttpResponseRedirect("http://localhost:8000/")
 
 
 def redirect(request):

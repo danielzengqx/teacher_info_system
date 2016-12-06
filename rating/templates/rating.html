@@ -48,25 +48,27 @@
 
 	<div class="container">
 		<div class="row">
-		    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
 
+		    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+			<h3>教师评分</h3>
 
 				<form method="post" action="/rating/">
 		  			{% csrf_token %}
 
 					<select class="selectpicker" name='m1' data-style="btn-success" >
-					  <optgroup label="专业1">templates
+					  <optgroup label="工学系">templates
 
 					    {% for t in teachers %}
 					    	<option value={{ t.tid }} >{{ t.name }} </option>
 
 					    {% endfor %}
 					  </optgroup>
-					  <optgroup label="专业2" name='m2'>
+<!-- 					  <optgroup label="专业2" name='m2'>
 					    <option value='t4'> 教师4</option>
 					    <option value='t5'>教师5</option>
 					    <option value='t6'>教师6</option>
-					  </optgroup>
+					  </optgroup> -->
+
 					</select>
 					
 					<hr class="colorgraph">
