@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
-    <title>Profile - Bootsnipp.com</title>
+    <title>{{ name }} 的个人主页</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 
@@ -718,7 +718,7 @@ opacity:0.9;
                      <a class="list-group-item inactive-link" href="#">
                      {% for item in score_item %}
                      <label class="control-label" >{{ item.content }} </label>  
-                      <div class="rating-container rating-md rating-animate">
+                      <div class="rating-container rating-md rating-animate rating-xs">
 
 
                         <div class="rating">
