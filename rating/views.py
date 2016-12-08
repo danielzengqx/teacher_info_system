@@ -4,6 +4,7 @@ from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from models import Teacher
 # Create your views here.
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import cache_page
 
 @login_required(login_url='/rating/redirect/')
 def rating(request):
@@ -56,7 +57,8 @@ def rating(request):
 		teacher.score10 = (teacher.score10 + s10) / teacher.score10_count
 
 		teacher.save()
-		return HttpResponseRedirect("/")
+		return HttpResponseRedirect("./success_redirect/%s" %tid)
+		# return test_cache(request)
 
 
 	teachers =  Teacher.objects.all()
@@ -98,6 +100,15 @@ def redirect(request):
 
 	return render(request, template, context)
 
+def success_redirect(request, tid):
+	template = "success_redirect.html"
+
+	context = {"tid" : tid,
+				}
+
+
+	return render(request, template, context)
+
 import uuid 
 def get_ref_id():
 	ref_id = str(uuid.uuid4())[:11].replace('-', '').lower()
@@ -106,5 +117,9 @@ def get_ref_id():
 		return id_exists
 	except:
 		return ref_id
+
+@cache_page(5)
+def test_cache(request):
+	return HttpResponse("hello")
 
 

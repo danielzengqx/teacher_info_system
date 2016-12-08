@@ -5,5 +5,5 @@ from django.contrib.auth import logout
 def myLogout(request):
 	logout(request)
     # Redirect to a success page.
-	return HttpResponseRedirect("http://localhost:8000/")
+	return HttpResponseRedirect("/")
 
