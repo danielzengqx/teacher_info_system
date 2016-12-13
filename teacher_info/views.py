@@ -9,18 +9,33 @@ from django.contrib.auth.decorators import login_required
 
 def teacher_info(request):
 	teachers =  Teacher.objects.all()
-	# for t in teachers:
-		# print "here is teacher %s, name %s" %(t.tid, t.name)
+	teachers_major1 = list()
+	teachers_major2 = list()
+	teachers_major3 = list()
+	for t in teachers:
+		if t.major == u"计算机":
+			print "here is teacher %s, name %s, major %s" %(t.tid, t.name, t.major)
+			teachers_major1.append(t)
+		elif t.major == u"音乐系":
+			print "here is teacher %s, name %s, major %s" %(t.tid, t.name, t.major)
+			teachers_major2.append(t)
+		else:
+			teachers_major3.append(t)
 
 	# template = "teacher_info.html"
 	# template = "teacher_widget.html"
 	# template = "profile.html"
-	template = "user_profile.html"
+	# template = "user_profile.html"
+	template = "tab.html"
 
-
+	print teachers_major3
 
 	context = {
-				"teachers": teachers
+				"teachers_major1": teachers_major1,
+				"teachers_major2": teachers_major2,
+				"teachers_major3": teachers_major3
+
+
 				}
 
 

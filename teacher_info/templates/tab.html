@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
+    <title>Bootstrap Line Tabs by KeenThemes - Bootsnipp.com</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <style type="text/css">
+        /***
+Bootstrap Line Tabs by @keenthemes
+A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
+Licensed under MIT
+***/
+
+/* Tabs panel */
+.tabbable-panel {
+  border:1px solid #eee;
+  padding: 10px;
+}
+
+/* Default mode */
+.tabbable-line > .nav-tabs {
+  border: none;
+  margin: 0px;
+}
+.tabbable-line > .nav-tabs > li {
+  margin-right: 2px;
+}
+.tabbable-line > .nav-tabs > li > a {
+  border: 0;
+  margin-right: 0;
+  color: #737373;
+}
+.tabbable-line > .nav-tabs > li > a > i {
+  color: #a6a6a6;
+}
+.tabbable-line > .nav-tabs > li.open, .tabbable-line > .nav-tabs > li:hover {
+  border-bottom: 4px solid #fbcdcf;
+}
+.tabbable-line > .nav-tabs > li.open > a, .tabbable-line > .nav-tabs > li:hover > a {
+  border: 0;
+  background: none !important;
+  color: #333333;
+}
+.tabbable-line > .nav-tabs > li.open > a > i, .tabbable-line > .nav-tabs > li:hover > a > i {
+  color: #a6a6a6;
+}
+.tabbable-line > .nav-tabs > li.open .dropdown-menu, .tabbable-line > .nav-tabs > li:hover .dropdown-menu {
+  margin-top: 0px;
+}
+.tabbable-line > .nav-tabs > li.active {
+  border-bottom: 4px solid #f3565d;
+  position: relative;
+}
+.tabbable-line > .nav-tabs > li.active > a {
+  border: 0;
+  color: #333333;
+}
+.tabbable-line > .nav-tabs > li.active > a > i {
+  color: #404040;
+}
+.tabbable-line > .tab-content {
+  margin-top: -3px;
+  background-color: #fff;
+  border: 0;
+  border-top: 1px solid #eee;
+  padding: 15px 0;
+}
+.portlet .tabbable-line > .tab-content {
+  padding-bottom: 0;
+}
+
+/* Below tabs mode */
+
+.tabbable-line.tabs-below > .nav-tabs > li {
+  border-top: 4px solid transparent;
+}
+.tabbable-line.tabs-below > .nav-tabs > li > a {
+  margin-top: 0;
+}
+.tabbable-line.tabs-below > .nav-tabs > li:hover {
+  border-bottom: 0;
+  border-top: 4px solid #fbcdcf;
+}
+.tabbable-line.tabs-below > .nav-tabs > li.active {
+  margin-bottom: -2px;
+  border-bottom: 0;
+  border-top: 4px solid #f3565d;
+}
+.tabbable-line.tabs-below > .tab-content {
+  margin-top: -10px;
+  border-top: 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!--
+Bootstrap Line Tabs by @keenthemes
+A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
+Licensed under MIT
+-->
+
+<div class="container">
+    <div class="row">
+		<div class="col-md-12">
+			<h3>教师信息</h3>
+
+			<div class="tabbable-panel">
+				<div class="tabbable-line">
+					<ul class="nav nav-tabs ">
+						<li class="active">
+							<a href="#tab_default_1" data-toggle="tab">
+							计算机 </a>
+						</li>
+						<li>
+							<a href="#tab_default_2" data-toggle="tab">
+							音乐系 </a>
+						</li>
+						<li>
+							<a href="#tab_default_3" data-toggle="tab">
+							工学系 </a>
+						</li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="tab_default_1">
+						    {% for t in teachers_major1 %}
+						        <div class="row">
+						        <div class="col-xs-12 col-sm-6 col-md-6">
+						            <div class="well well-sm">
+						                <div class="row">
+						                    <div class="col-sm-6 col-md-4 col-xs-4">
+						                        <img src="{%static 'img/dog.jpeg' %}" alt="" class="img-rounded img-responsive" />
+						                    </div>
+						                    <div class="col-sm-6 col-md-8 col-xs-8">
+						                        <h4>
+						                            {{ t.name }}</h4>
+						                        <small><cite title="San Francisco, USA">{{ t.tid }}, {{ t.score1 }} <i class="glyphicon glyphicon-map-marker">
+						                        </i></cite></small>
+						                        <p>
+						                            <i class="glyphicon glyphicon-envelope"></i>email@example.com
+						                            <br />
+						                            <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">{{ t.major }} </a>
+						                            <br />
+						                            <i class="glyphicon glyphicon-gift"></i>June 02, 1988</p>
+						                        <!-- Split button -->
+						                        <div class="btn-group">
+						<!--                             <button type="button" class="btn btn-primary">
+						                                Social</button>
+						                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+						                                <span class="caret"></span><span class="sr-only">Social</span>
+						                            </button> -->
+
+						                            <a class="btn btn-default" href="detail/{{ t.tid }}" role="button">个人主页</a>
+						<!-- 
+						                            <ul class="dropdown-menu" role="menu">
+						                                <li><a href="#">Twitter</a></li>
+						                                <li><a href="https://plus.google.com/+Jquery2dotnet/posts">Google +</a></li>
+						                                <li><a href="https://www.facebook.com/jquery2dotnet">Facebook</a></li>
+						                                <li class="divider"></li>
+						                                <li><a href="#">Github</a></li>
+						                            </ul> -->
+						                        </div>
+						                    </div>
+						                </div>
+						            </div>
+						        </div>
+						    </div>
+						    {% endfor %}
+						</div>
+						<div class="tab-pane" id="tab_default_2">
+						    {% for t in teachers_major2 %}
+						        <div class="row">
+						        <div class="col-xs-12 col-sm-6 col-md-6">
+						            <div class="well well-sm">
+						                <div class="row">
+						                    <div class="col-sm-6 col-md-4 col-xs-4">
+						                        <img src="{%static 'img/dog.jpeg' %}" alt="" class="img-rounded img-responsive" />
+						                    </div>
+						                    <div class="col-sm-6 col-md-8 col-xs-8">
+						                        <h4>
+						                            {{ t.name }}</h4>
+						                        <small><cite title="San Francisco, USA">{{ t.tid }}, {{ t.score1 }} <i class="glyphicon glyphicon-map-marker">
+						                        </i></cite></small>
+						                        <p>
+						                            <i class="glyphicon glyphicon-envelope"></i>email@example.com
+						                            <br />
+						                            <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">{{ t.major }} </a>
+						                            <br />
+						                            <i class="glyphicon glyphicon-gift"></i>June 02, 1988</p>
+						                        <!-- Split button -->
+						                        <div class="btn-group">
+						<!--                             <button type="button" class="btn btn-primary">
+						                                Social</button>
+						                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+						                                <span class="caret"></span><span class="sr-only">Social</span>
+						                            </button> -->
+
+						                            <a class="btn btn-default" href="detail/{{ t.tid }}" role="button">个人主页</a>
+						<!-- 
+						                            <ul class="dropdown-menu" role="menu">
+						                                <li><a href="#">Twitter</a></li>
+						                                <li><a href="https://plus.google.com/+Jquery2dotnet/posts">Google +</a></li>
+						                                <li><a href="https://www.facebook.com/jquery2dotnet">Facebook</a></li>
+						                                <li class="divider"></li>
+						                                <li><a href="#">Github</a></li>
+						                            </ul> -->
+						                        </div>
+						                    </div>
+						                </div>
+						            </div>
+						        </div>
+						    </div>
+						    {% endfor %}
+						</div>
+						<div class="tab-pane" id="tab_default_3">
+						    {% for t in teachers_major3 %}
+						        <div class="row">
+						        <div class="col-xs-12 col-sm-6 col-md-6">
+						            <div class="well well-sm">
+						                <div class="row">
+						                    <div class="col-sm-6 col-md-4 col-xs-4">
+						                        <img src="{%static 'img/dog.jpeg' %}" alt="" class="img-rounded img-responsive" />
+						                    </div>
+						                    <div class="col-sm-6 col-md-8 col-xs-8">
+						                        <h4>{{ t.name }}</h4>
+						                        <small><cite title="San Francisco, USA">{{ t.tid }}, {{ t.score1 }} <i class="glyphicon glyphicon-map-marker">
+						                        </i></cite></small>
+						                        <!-- <p> -->
+						                            <!-- <i class="glyphicon glyphicon-envelope"></i>email@example.com -->
+						                            <br />
+						                            <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">{{ t.major }} </a>
+						                            <br />
+						                            <!-- <i class="glyphicon glyphicon-gift"></i>June 02, 1988</p> -->
+						                        <!-- Split button -->
+						                        <div class="btn-group">
+						<!--                             <button type="button" class="btn btn-primary">
+						                                Social</button>
+						                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+						                                <span class="caret"></span><span class="sr-only">Social</span>
+						                            </button> -->
+
+						                            <a class="btn btn-default" href="detail/{{ t.tid }}" role="button">个人主页</a>
+						<!-- 
+						                            <ul class="dropdown-menu" role="menu">
+						                                <li><a href="#">Twitter</a></li>
+						                                <li><a href="https://plus.google.com/+Jquery2dotnet/posts">Google +</a></li>
+						                                <li><a href="https://www.facebook.com/jquery2dotnet">Facebook</a></li>
+						                                <li class="divider"></li>
+						                                <li><a href="#">Github</a></li>
+						                            </ul> -->
+						                        </div>
+						                    </div>
+						                </div>
+						            </div>
+						        </div>
+						    </div>
+						    {% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br>
+<br>
+<center>
+<strong>Powered by <a href="http://j.mp/metronictheme" target="_blank">KeenThemes</a></strong>
+</center>
+<br>
+<br>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>
