@@ -14,8 +14,8 @@ def auth(request):
 	if request.POST:
 		print "in post"
 		print request.POST
-	username = request.POST['user_name']
-	password = request.POST['password']
+	username = request.POST['user_name'].strip()
+	password = request.POST['password'].strip()
 	user = authenticate(username=username, password=password)
 	if user is not None:
 		# return HttpResponse("Welcome")

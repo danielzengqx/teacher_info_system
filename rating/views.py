@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # coding=gbk
+from __future__ import division 
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from models import Teacher
 # Create your views here.
@@ -18,7 +19,6 @@ def rating(request):
 
 		tid = request.POST['m1']
 		s1 = int(request.POST['rating_0'])
-
 		s2 = int(request.POST['rating_1'])
 		s3 = int(request.POST['rating_2'])
 		s4 = int(request.POST['rating_3'])
@@ -33,6 +33,22 @@ def rating(request):
 
 		teacher = Teacher.objects.get(tid=tid)
 
+		print "score 1 before %s" %teacher.score1
+
+		teacher.score1 = teacher.score1 * teacher.score1_count
+
+		print "score 1 before2 %s" %teacher.score1
+
+		teacher.score2 = teacher.score2 * teacher.score2_count
+		teacher.score3 = teacher.score3 * teacher.score3_count
+		teacher.score4 = teacher.score4 * teacher.score4_count
+		teacher.score5 = teacher.score5 * teacher.score5_count
+		teacher.score6 = teacher.score6 * teacher.score6_count
+		teacher.score7 = teacher.score7 * teacher.score7_count
+		teacher.score8 = teacher.score8 * teacher.score8_count
+		teacher.score9 = teacher.score9 * teacher.score9_count
+		teacher.score10 = teacher.score10 * teacher.score10_count
+
  		teacher.score1_count = teacher.score1_count + 1
  		teacher.score2_count = teacher.score2_count + 1
  		teacher.score3_count = teacher.score3_count + 1
@@ -44,8 +60,12 @@ def rating(request):
  		teacher.score9_count = teacher.score9_count + 1
  		teacher.score10_count = teacher.score10_count + 1
 
+		print "score 1 count  %s" %teacher.score1_count
 		# print "teacher %s name is %s" %(tid, teacher.name)
 		teacher.score1 = (teacher.score1 + s1) / teacher.score1_count
+
+		print "score 1 after %s" %teacher.score1
+
 		teacher.score2 = (teacher.score2 + s2) / teacher.score2_count
 		teacher.score3 = (teacher.score3 + s3) / teacher.score3_count
 		teacher.score4 = (teacher.score4 + s4) / teacher.score4_count
@@ -57,7 +77,7 @@ def rating(request):
 		teacher.score10 = (teacher.score10 + s10) / teacher.score10_count
 
 		teacher.save()
-		return HttpResponseRedirect("./success_redirect/%s" %tid)
+		return HttpResponseRedirect("/teacher_info/detail/%s" %tid)
 		# return test_cache(request)
 
 

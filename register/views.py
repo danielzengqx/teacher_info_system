@@ -40,7 +40,7 @@ def get_ref_id():
 
 def signup(request):
 	print request.POST
-	user = User.objects.create_user(request.POST['user_name'], request.POST['email'], request.POST['password'])
+	user = User.objects.create_user(request.POST['user_name'].strip(), request.POST['email'].strip(), request.POST['password'].strip())
 	user.save()
 
 	return HttpResponse(request.POST['user_name'])

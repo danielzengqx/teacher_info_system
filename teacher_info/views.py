@@ -14,10 +14,10 @@ def teacher_info(request):
 	teachers_major3 = list()
 	for t in teachers:
 		if t.major == u"计算机":
-			print "here is teacher %s, name %s, major %s" %(t.tid, t.name, t.major)
+			# print "here is teacher %s, name %s, major %s" %(t.tid, t.name, t.major)
 			teachers_major1.append(t)
 		elif t.major == u"音乐系":
-			print "here is teacher %s, name %s, major %s" %(t.tid, t.name, t.major)
+			# print "here is teacher %s, name %s, major %s" %(t.tid, t.name, t.major)
 			teachers_major2.append(t)
 		else:
 			teachers_major3.append(t)
@@ -66,20 +66,20 @@ def teacher_detail(request, tid):
 
 
 	
-	score1_item = {'content':teacher.score1_content, 'score': teacher.score1, 'count':teacher.score1_count, 'score_percent': format(teacher.score1/10,'.0%')}
-	score2_item = {'content':teacher.score2_content, 'score': teacher.score2, 'count':teacher.score2_count, 'score_percent': format(teacher.score2/10,'.0%')}
-	score3_item = {'content':teacher.score3_content, 'score': teacher.score3, 'count':teacher.score3_count, 'score_percent': format(teacher.score3/10,'.0%')}
-	score4_item = {'content':teacher.score4_content, 'score': teacher.score4, 'count':teacher.score4_count, 'score_percent': format(teacher.score4/10,'.0%')}
-	score5_item = {'content':teacher.score5_content, 'score': teacher.score5, 'count':teacher.score5_count, 'score_percent': format(teacher.score5/10,'.0%')}
-	score6_item = {'content':teacher.score6_content, 'score': teacher.score6, 'count':teacher.score6_count, 'score_percent': format(teacher.score6/10,'.0%')}
-	score7_item = {'content':teacher.score7_content, 'score': teacher.score7, 'count':teacher.score7_count, 'score_percent': format(teacher.score7/10,'.0%')}
-	score8_item = {'content':teacher.score8_content, 'score': teacher.score8, 'count':teacher.score8_count, 'score_percent': format(teacher.score8/10,'.0%')}
-	score9_item = {'content':teacher.score9_content, 'score': teacher.score9, 'count':teacher.score9_count, 'score_percent': format(teacher.score9/10,'.0%')}
-	score10_item = {'content':teacher.score10_content, 'score': teacher.score10, 'count':teacher.score10_content, 'score_percent': format(teacher.score10/10,'.0%')}
+	score1_item = {'content':teacher.score1_content, 'score': int(round(teacher.score1)), 'count':teacher.score1_count, 'score_percent': format(teacher.score1/10,'.0%')}
+	score2_item = {'content':teacher.score2_content, 'score': int(round(teacher.score2)), 'count':teacher.score2_count, 'score_percent': format(teacher.score2/10,'.0%')}
+	score3_item = {'content':teacher.score3_content, 'score': int(round(teacher.score3)), 'count':teacher.score3_count, 'score_percent': format(teacher.score3/10,'.0%')}
+	score4_item = {'content':teacher.score4_content, 'score': int(round(teacher.score4)), 'count':teacher.score4_count, 'score_percent': format(teacher.score4/10,'.0%')}
+	score5_item = {'content':teacher.score5_content, 'score': int(round(teacher.score5)), 'count':teacher.score5_count, 'score_percent': format(teacher.score5/10,'.0%')}
+	score6_item = {'content':teacher.score6_content, 'score': int(round(teacher.score6)), 'count':teacher.score6_count, 'score_percent': format(teacher.score6/10,'.0%')}
+	score7_item = {'content':teacher.score7_content, 'score': int(round(teacher.score7)), 'count':teacher.score7_count, 'score_percent': format(teacher.score7/10,'.0%')}
+	score8_item = {'content':teacher.score8_content, 'score': int(round(teacher.score8)), 'count':teacher.score8_count, 'score_percent': format(teacher.score8/10,'.0%')}
+	score9_item = {'content':teacher.score9_content, 'score': int(round(teacher.score9)), 'count':teacher.score9_count, 'score_percent': format(teacher.score9/10,'.0%')}
+	score10_item = {'content':teacher.score10_content, 'score': int(round(teacher.score10)), 'count':teacher.score10_content, 'score_percent': format(teacher.score10/10,'.0%')}
 
 	score_item = [score1_item, score2_item, score3_item,score4_item,score5_item,score6_item,score7_item,score8_item,score9_item,score10_item]
 
-	context = {
+	context = {	
 				"name": teacher.name,
 				"major": teacher.major,
 				# 'score1_item' : score1_item ,

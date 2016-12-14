@@ -7,6 +7,8 @@
     <title>{{ name }} 的个人主页</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="http://bootsnipp.com/dist/bootsnipp.min.css?ver=7d23ff901039aef6293954d33d23c066">
+
 
     <style type="text/css">
         
@@ -582,6 +584,35 @@ opacity:0.9;
 
 
 <!-- nav bar -->
+<nav class="navbar navbar-fixed-top navbar-bootsnipp animate" role="navigation" style="z-index: 9999999">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="true">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="animbrand">
+        <a class="navbar-brand animate" href="/">教师评分系统</a>
+      </div>
+    </div>
+<script src="/js/BSAcpc.js" async=""></script>
+<div class="bsa-apiads hidden-sm hidden-xs"></div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="navbar-collapse collapse out" id="bs-example-navbar-collapse-2" aria-expanded="false" style="">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="/" >主页 </a>  
+          <a href="/rating" >评分 </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</nav>    
+
 <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
  --><div class="container">
 <div class="row">

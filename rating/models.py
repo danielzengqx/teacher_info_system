@@ -8,7 +8,7 @@ from django.utils.encoding import python_2_unicode_compatible
 @python_2_unicode_compatible  # only if you need to support Python 2
 class Teacher(models.Model):
     name = models.CharField(max_length=200)
-    score1 = models.IntegerField(default=0)
+    score1 = models.FloatField(default=0)
     score1_content = models.CharField(max_length=500, default='着装合理，治学严谨。严于律己，从不迟到早退')
     score1_count = models.IntegerField(default=0)
 
