@@ -4,10 +4,11 @@
 <head>
     <meta charset="utf-8">
     <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
-    <title>Bootstrap Line Tabs by KeenThemes - Bootsnipp.com</title>
+    <title>教师评分</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="http://bootsnipp.com/dist/bootsnipp.min.css?ver=7d23ff901039aef6293954d33d23c066">
+    <link href="{% static 'css/bootsnipp.min.css' %}" rel="stylesheet">    
+
     <style type="text/css">
         /***
 Bootstrap Line Tabs by @keenthemes
@@ -297,23 +298,14 @@ Licensed under MIT
 						            <div class="well well-sm">
 						                <div class="row">
 						                    <div class="col-sm-6 col-md-4 col-xs-4">
-						                        <img src="{%static 'img/dog.jpeg' %}" alt="" class="img-rounded img-responsive" />
-						                        <h3 class="bold padding-bottom-7">7 <small>/ 10</small></h3>
+						                    	<a href="detail/{{ t.tid }}">
+						                        	<img src="{%static 'img/dog.jpeg' %}"  alt="" class="img-rounded img-responsive" />
+						                        </a>
+						                        <!-- <h3 class="bold padding-bottom-7"> {{ t.score_total }}</h3> -->
 
-						                    </div>
-						                    <div class="col-sm-6 col-md-8 col-xs-8">
-						                        <h4>{{ t.name }}</h4>
-						                        <small><cite title="San Francisco, USA">{{ t.tid }}<!-- , {{ t.score1 }} <i class="glyphicon glyphicon-map-marker"></i> -->
-						                        </cite></small>
-						                        <br />
-						                        <br />
-						                        <!-- <p> -->
-<!-- 						                            <i class="glyphicon glyphicon-envelope"></i>email@example.com
-						                            <br /> -->
-<!-- 						                            <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">{{ t.major }} </a>
-						                            <br /> -->
-						                            <!-- <i class="glyphicon glyphicon-gift"></i>June 02, 1988</p> -->
-						                        <!-- Split button -->
+						                                            <!-- <div class="col-xs-12 col-md-6"> -->
+
+						                        					                        <!-- Split button -->
 						                        <div class="btn-group">
 						<!--                             <button type="button" class="btn btn-primary">
 						                                Social</button>
@@ -321,7 +313,7 @@ Licensed under MIT
 						                                <span class="caret"></span><span class="sr-only">Social</span>
 						                            </button> -->
 
-						                            <a class="btn btn-default" href="detail/{{ t.tid }}" role="button">个人主页</a>
+						                            <!-- <a class="btn btn-default" href="detail/{{ t.tid }}" role="button">个人主页</a> -->
 						<!-- 
 						                            <ul class="dropdown-menu" role="menu">
 						                                <li><a href="#">Twitter</a></li>
@@ -331,6 +323,41 @@ Licensed under MIT
 						                                <li><a href="#">Github</a></li>
 						                            </ul> -->
 						                        </div>
+                    <!-- </div> -->
+
+
+						                    </div>
+						                    <div class="col-sm-6 col-md-8 col-xs-8">
+						                    	<a href="detail/{{ t.tid }}">
+						                        	<h4>{{ t.name }}</h4>
+						                        </a>
+
+<!-- 						                        <small><cite title="San Francisco, USA">{{ t.tid }}, {{ t.score1 }} <i class="glyphicon glyphicon-map-marker"></i>
+ -->						                        </cite></small>
+						                        <!-- <br /> -->
+						                        <!-- <br /> -->
+						                        <!-- <p> -->
+<!-- 						                            <i class="glyphicon glyphicon-envelope"></i>email@example.com
+						                            <br /> -->
+<!-- 						                            <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">{{ t.major }} </a>
+						                            <br /> -->
+						                            <!-- <i class="glyphicon glyphicon-gift"></i>June 02, 1988</p> -->
+						<!-- star -->
+                    <!-- <div class="col-xs-12 col-md-6 text-left"> -->
+                        <div class="rating">
+                        {% for i in t.stars_filled %}
+                            <span class="glyphicon glyphicon-star" style="color: #ebab3c"></span>
+                        {% endfor %}
+
+                        {% for i in t.stars_empty %}
+                            </span><span class="glyphicon glyphicon-star-empty"></span>
+                        {% endfor %}
+						</div>
+                        <div>
+                            <span class="glyphicon glyphicon-user"></span>{{ t.score1_count}} 个评分
+                        </div>
+                    <!-- </div> -->
+                    <!-- end star -->
 						                    </div>
 						                </div>
 						            </div>
@@ -346,13 +373,25 @@ Licensed under MIT
 		</div>
 	</div>
 </div>
-<br>
+<!-- <br>
 <br>
 <center>
 <strong>Powered by <a href="http://j.mp/metronictheme" target="_blank">KeenThemes</a></strong>
 </center>
 <br>
-<br>
+<br> -->
+<center>		
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6">
+                      <input type="submit" class="btn btn-lg btn-success btn-block" value="登录">
+					</div>
+					<div class="col-xs-6 col-sm-6 col-md-6">
+						<a href="/register" class="btn btn-lg btn-primary btn-block">注册</a>
+					</div>
+				</div>
+</center>
+
+
 <script type="text/javascript">
 
 </script>

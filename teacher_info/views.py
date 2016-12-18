@@ -79,23 +79,18 @@ def teacher_detail(request, tid):
 
 	score_item = [score1_item, score2_item, score3_item,score4_item,score5_item,score6_item,score7_item,score8_item,score9_item,score10_item]
 
+
+
+	score_total_percent = format(teacher.score_total/100,'.0%')
 	context = {	
 				"name": teacher.name,
 				"major": teacher.major,
-				# 'score1_item' : score1_item ,
-				# 'score2_item' : score2_item ,
-				# 'score3_item' : score3_item ,
-				# 'score4_item' : score4_item ,
-				# 'score5_item' : score5_item ,
-				# 'score6_item' : score6_item ,
-				# 'score7_item' : score7_item ,
-				# 'score8_item' : score8_item ,
-				# 'score9_item' : score9_item ,
-				# 'score10_item': score10_item,
 				'score_item': score_item,
 				'count': teacher.score1_count,
 
 				"intro": teacher.intro,
+				"score_total": int(round(teacher.score_total, 1)),
+				"score_total_percent": score_total_percent
 
 				}
 
