@@ -40,7 +40,19 @@ def load_more(request, tab=1, page=0):
 	# return HttpResponseRedirect("http://localhost:8000/")
 
 
+def teacher_init():
+	teachers =  Teacher.objects.all()
+	for t in teachers:
+		# print "count %s type %s, star" %(t.score1_count, type(t.score1_count))
+		if t.score1_count == 0:
+			print "equals zero"
+			t.stars_filled = ''
+			t.stars_empty = 'xxxxx'
+			t.save()
+			# print "stars after %s" %t.stars_filled
+
 def teacher_info(request, page=0):
+	teacher_init()
 	teachers =  Teacher.objects.all()
 	teachers_major1 = list()
 	teachers_major2 = list()
