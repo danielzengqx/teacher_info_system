@@ -6,8 +6,41 @@ from rating.models import Teacher
 # Create your views here.
 from django.contrib.auth.decorators import login_required
 
+def load_more(request, tab=1, page=0):
+	teachers =  Teacher.objects.all()
+	teachers_major1 = list()
+	teachers_major2 = list()
+	teachers_major3 = list()
+	for t in teachers:
+		if t.major == u"计算机":
+			# print "here is teacher %s, name %s, major %s" %(t.tid, t.name, t.major)
+			teachers_major1.append(t)
+		elif t.major == u"音乐系":
+			# print "here is teacher %s, name %s, major %s" %(t.tid, t.name, t.major)
+			teachers_major2.append(t)
+		else:
+			teachers_major3.append(t)
 
-def teacher_info(request):
+	# template = "teacher_info.html"
+	# template = "teacher_widget.html"
+	# template = "profile.html"
+	# template = "user_profile.html"
+	template = "page_tab%s.html" %tab
+	print template
+	print teachers_major3
+	page = int(page)
+	context = {
+				"teachers_major1": teachers_major1[:(page+1)*10],
+				"teachers_major2": teachers_major2[:(page+1)*10],
+				"teachers_major3": teachers_major3[:(page+1)*10]
+				}
+
+
+	return render(request, template, context)
+	# return HttpResponseRedirect("http://localhost:8000/")
+
+
+def teacher_info(request, page=0):
 	teachers =  Teacher.objects.all()
 	teachers_major1 = list()
 	teachers_major2 = list()
@@ -29,11 +62,11 @@ def teacher_info(request):
 	template = "tab.html"
 
 	print teachers_major3
-
+	page = int(page)
 	context = {
-				"teachers_major1": teachers_major1,
-				"teachers_major2": teachers_major2,
-				"teachers_major3": teachers_major3
+				"teachers_major1": teachers_major1[page*10:(page+1)*10],
+				"teachers_major2": teachers_major2[page*10:(page+1)*10],
+				"teachers_major3": teachers_major3[page*10:(page+1)*10]
 
 
 				}

@@ -79,7 +79,7 @@ def rating(request):
 		teacher.score8 = (teacher.score8 + s8) / teacher.score8_count
 		teacher.score9 = (teacher.score9 + s9) / teacher.score9_count
 		teacher.score10 = (teacher.score10 + s10) / teacher.score10_count
-		teacher.score_total =   teacher.score1 + teacher.score2 + teacher.score3 + teacher.score4 + teacher.score5 + teacher.score6 + teacher.score7 + teacher.score8 + teacher.score9
+		teacher.score_total =   teacher.score1 + teacher.score2 + teacher.score3 + teacher.score4 + teacher.score5 + teacher.score6 + teacher.score7 + teacher.score8 + teacher.score9 + teacher.score10
 		stars = int(round(teacher.score_total /100 * 5 ))
 		teacher.stars_filled = stars * 'x'
 		teacher.stars_empty = (5 - stars) * 'x'

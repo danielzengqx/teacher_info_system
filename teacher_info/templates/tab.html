@@ -154,7 +154,7 @@ border-width: 2px;
         <span class="icon-bar"></span>
       </button>
       <div class="animbrand">
-        <a class="navbar-brand animate" href="/">教师评分系统</a>
+        <a class="navbar-brand animate" href="/">教师评分系统2</a>
       </div>
     </div>
 <script src="/js/BSAcpc.js" async=""></script>
@@ -186,20 +186,21 @@ Licensed under MIT
 				<div class="tabbable-line">
 					<ul class="nav nav-tabs ">
 						<li class="active">
-							<a href="#tab_default_1" data-toggle="tab">
+							<a href="#tab_1" data-toggle="tab">
 							计算机 </a>
 						</li>
 						<li>
-							<a href="#tab_default_2" data-toggle="tab">
+							<a href="#tab_2" data-toggle="tab">
 							音乐系 </a>
 						</li>
 						<li>
-							<a href="#tab_default_3" data-toggle="tab">
+							<a href="#tab_3" data-toggle="tab">
 							工学系 </a>
 						</li>
 					</ul>
-					<div class="tab-content">
-						<div class="tab-pane active" id="tab_default_1">
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane active" id="tab_1">
+						<div id="page_tab1">
 						    {% for t in teachers_major1 %}
 						        <div class="row">
 						        <div class="col-xs-12 col-sm-6 col-md-6">
@@ -246,7 +247,15 @@ Licensed under MIT
 						    </div>
 						    {% endfor %}
 						</div>
-						<div class="tab-pane" id="tab_default_2">
+<!-- 							<div class="row">
+						    	<div class="col-xs-6 col-sm-6 col-xs-offset-3 col-md-6 col-sm-offset-3" ">
+									<button class="btn btn-lg btn-primary btn-block" id="load_more1" style="background-color: #eee; color: black; border-color: #e2e2e2;">加载更多
+									</button>
+								</div>
+						    </div> -->
+						</div>
+						<div class="tab-pane" id="tab_2">
+						<div id="page_tab2">
 						    {% for t in teachers_major2 %}
 						        <div class="row">
 						        <div class="col-xs-12 col-sm-6 col-md-6">
@@ -291,7 +300,15 @@ Licensed under MIT
 						    </div>
 						    {% endfor %}
 						</div>
-						<div class="tab-pane" id="tab_default_3">
+<!-- 						 	<div class="row">
+						    	<div class="col-xs-6 col-sm-6 col-xs-offset-3 col-md-6 col-sm-offset-3" ">
+									<button class="btn btn-lg btn-primary btn-block" id="load_more2" style="background-color: #eee; color: black; border-color: #e2e2e2;">加载更多
+									</button>
+								</div>
+							</div> -->
+						</div>
+						<div class="tab-pane" id="tab_3">
+						<div id="page_tab3">
 						    {% for t in teachers_major3 %}
 						        <div class="row">
 						        <div class="col-xs-12 col-sm-6 col-md-6">
@@ -342,33 +359,42 @@ Licensed under MIT
 <!-- 						                            <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">{{ t.major }} </a>
 						                            <br /> -->
 						                            <!-- <i class="glyphicon glyphicon-gift"></i>June 02, 1988</p> -->
-						<!-- star -->
-                    <!-- <div class="col-xs-12 col-md-6 text-left"> -->
-                        <div class="rating">
-                        {% for i in t.stars_filled %}
-                            <span class="glyphicon glyphicon-star" style="color: #ebab3c"></span>
-                        {% endfor %}
+												<!-- star -->
+						                    <!-- <div class="col-xs-12 col-md-6 text-left"> -->
+						                        <div class="rating">
+						                        {% for i in t.stars_filled %}
+						                            <span class="glyphicon glyphicon-star" style="color: #ebab3c"></span>
+						                        {% endfor %}
 
-                        {% for i in t.stars_empty %}
-                            </span><span class="glyphicon glyphicon-star-empty"></span>
-                        {% endfor %}
-						</div>
-                        <div>
-                            <span class="glyphicon glyphicon-user"></span>{{ t.score1_count}} 个评分
-                        </div>
-                    <!-- </div> -->
-                    <!-- end star -->
+						                        {% for i in t.stars_empty %}
+						                            </span><span class="glyphicon glyphicon-star-empty"></span>
+						                        {% endfor %}
+												</div>
+						                        <div>
+						                            <span class="glyphicon glyphicon-user"></span>{{ t.score1_count}} 个评分
+						                        </div>
+						                    <!-- </div> -->
+						                    <!-- end star -->
 						                    </div>
 						                </div>
 						            </div>
 						        </div>
 						    </div>
+
 						    {% endfor %}
+						    </div>
+
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- end of tabbable-panel-->
+						    <div class="row">
+						    	<div class="col-xs-6 col-sm-6 col-xs-offset-3 col-md-6 col-sm-offset-3" ">
+									<button class="btn btn-lg btn-primary btn-block" id="load_more" style="background-color: #eee; color: black; border-color: #e2e2e2;">加载更多
+									</button>
+								</div>
+						    </div>
 
 		</div>
 	</div>
@@ -380,19 +406,33 @@ Licensed under MIT
 </center>
 <br>
 <br> -->
-<center>		
-		<div class="row">
-			<div class="col-xs-6 col-sm-6 col-md-6">
-                      <input type="submit" class="btn btn-lg btn-success btn-block" value="登录">
-					</div>
-					<div class="col-xs-6 col-sm-6 col-md-6">
-						<a href="/register" class="btn btn-lg btn-primary btn-block">注册</a>
-					</div>
-				</div>
-</center>
+
+
 
 
 <script type="text/javascript">
+
+
+$(document).ready(function(){
+	var page=1
+
+  	$("#load_more").click(function(){
+  		var $tab = $('#myTabContent'), $active = $tab.find('.tab-pane.active');
+  		  		var $tab_num = $active.attr("id")
+
+  		htmlobj=$.ajax({url:"/teacher_info/load_more/" + $tab_num + "/" + page,async:false});
+  		page = page +1 
+  		$("#" + $tab_num).html(htmlobj.responseText);
+    	alert($tab_num);
+
+  		alert("hello" + page);
+
+  });
+
+
+
+});
+
 
 </script>
 </body>

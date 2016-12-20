@@ -19,6 +19,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$',views.teacher_info, name='teacher_info'),
+    url(r'^load_more/tab_(?P<tab>\d+)/(?P<page>\d+)',views.load_more, name='load_more'),    
     url(r'^detail/(?P<tid>\d+)',views.teacher_detail, name='teacher_detail'),
 
 ]

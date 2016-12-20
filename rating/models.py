@@ -52,8 +52,8 @@ class Teacher(models.Model):
     tid = models.AutoField(primary_key=True)
     major = models.CharField(max_length=200, default='工学系')
     intro = models.TextField(default='个人简介，待补充')
-    stars_filled = models.CharField(max_length=5, default='')
-    stars_empty = models.CharField(max_length=5, default='yyyyy')
+    stars_filled = models.CharField(max_length=5, default='x')
+    stars_empty = models.CharField(max_length=5, default='yyyy')
 
     def __str__(self):
         return self.name
