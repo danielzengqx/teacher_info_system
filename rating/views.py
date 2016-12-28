@@ -6,7 +6,7 @@ from models import Teacher
 # Create your views here.
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_page
-
+import json
 @login_required(login_url='/rating/redirect/')
 def rating(request):
 	user = request.user.username
@@ -83,6 +83,9 @@ def rating(request):
 		stars = int(round(teacher.score_total /100 * 5 ))
 		teacher.stars_filled = stars * 'x'
 		teacher.stars_empty = (5 - stars) * 'x'
+		# print teacher.score_rater
+		# print type(json.loads(teacher.score_rater))
+		teacher.add_rater(user)
 
 		print "here is stars %s, stars_filled %s, stars_empty %s" %(stars, teacher.stars_filled, teacher.stars_empty)
 
@@ -153,5 +156,42 @@ def get_ref_id():
 @cache_page(5)
 def test_cache(request):
 	return HttpResponse("hello")
+
+
+def check_rater(request, tid):
+	user = request.user.username
+	email = request.user.email
+	teacher = Teacher.objects.get(tid=tid)
+	print teacher.score_rater
+	print "hererere"
+	if user in json.loads(teacher.score_rater):
+		print "in here"
+		return HttpResponse("<p>您已对该教师进行过评分</p>")
+	else:
+		teachers =  Teacher.objects.all()
+	# for t in teachers:
+	# 	print "here is teacher %s, name %s" %(t.tid, t.name)
+		template = "rating_form.html"
+
+		score_contents = list()
+		score_contents.append(teachers[0].score1_content)
+		score_contents.append(teachers[0].score2_content)
+		score_contents.append(teachers[0].score3_content)
+		score_contents.append(teachers[0].score4_content)
+		score_contents.append(teachers[0].score5_content)
+		score_contents.append(teachers[0].score6_content)
+		score_contents.append(teachers[0].score7_content)
+		score_contents.append(teachers[0].score8_content)
+		score_contents.append(teachers[0].score9_content)
+		score_contents.append(teachers[0].score10_content)	
+
+		context = {
+					"score_contents": score_contents
+					}
+
+
+	return render(request, template, context)
+
+
 
 

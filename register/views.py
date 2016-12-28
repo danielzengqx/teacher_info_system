@@ -5,10 +5,20 @@ from django.shortcuts import render, HttpResponse
 from django.conf import settings 
 from models import User
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
+
+def auth_mail():
+	print "sending email"
+	send_mail(
+    'Subject here',
+    'Here is the message.',
+    'cheer_zeng@163.com',
+    ['love_mainana@163.com'],
+    fail_silently=False,
+)
 
 # Create your views here.
 def register(request):
-
 	# registerInfo = {'username':'用户名', 'password':'密码','pwdconfirm':'确认密码', 'email':'邮箱'}
 	context = {}
 	template = "register.html"
@@ -39,9 +49,10 @@ def get_ref_id():
 # 	user.save()
 
 def signup(request):
+	auth_mail()
 	print request.POST
-	user = User.objects.create_user(request.POST['user_name'].strip(), request.POST['email'].strip(), request.POST['password'].strip())
-	user.save()
+	# user = User.objects.create_user(request.POST['user_name'].strip(), request.POST['email'].strip(), request.POST['password'].strip())
+	# user.save()
 
 	return HttpResponse(request.POST['user_name'])
 

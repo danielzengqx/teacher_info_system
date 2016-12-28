@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
-
+import json
 
 # Create your models here.
 
@@ -54,6 +54,12 @@ class Teacher(models.Model):
     intro = models.TextField(default='个人简介，待补充')
     stars_filled = models.CharField(max_length=5, default='x')
     stars_empty = models.CharField(max_length=5, default='yyyy')
+    score_rater = models.CharField(max_length=5000, default='[1]')
+
+    def add_rater(self, rater):
+        tmp = json.loads(self.score_rater)
+        tmp.append(rater)
+        self.score_rater = json.dumps(tmp)
 
     def __str__(self):
         return self.name

@@ -119,6 +119,12 @@ border-bottom-color: red;
 border-width: 2px;
 
 }
+
+@grid-float-breakpoint {
+
+
+}
+
     </style>    
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
@@ -143,9 +149,8 @@ border-width: 2px;
 			</nav> -->
 
 
-<nav class="navbar navbar-fixed-top navbar-bootsnipp animate" role="navigation" style="z-index: 9999999">
+<nav class="navbar navbar-fixed-bottom navbar-bootsnipp animate" role="navigation" style="z-index: 9999999">
   <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="true">
         <span class="sr-only">教师信息</span>
@@ -159,7 +164,6 @@ border-width: 2px;
     </div>
 <script src="/js/BSAcpc.js" async=""></script>
 <div class="bsa-apiads hidden-sm hidden-xs"></div>
-    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="navbar-collapse collapse out" id="bs-example-navbar-collapse-2" aria-expanded="false" style="">
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -171,6 +175,8 @@ border-width: 2px;
   </div>
 
 </nav>			
+
+
 
 <!--
 Bootstrap Line Tabs by @keenthemes
@@ -415,9 +421,9 @@ $(document).ready(function(){
   		htmlobj=$.ajax({url:"/teacher_info/load_more/" + $tab_num + "/" + page,async:false});
   		page = page +1 
   		$("#" + $tab_num).html(htmlobj.responseText);
-    	alert($tab_num);
+    	// alert($tab_num);
 
-  		alert("hello" + page);
+  		// alert("hello" + page);
 
   });
 

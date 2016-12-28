@@ -19,12 +19,12 @@
 		<!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet"> -->
 
 		<!-- <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet"> -->
-		<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+		<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
 		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="{% static 'bootstrap-select-1.11.2/dist/css/bootstrap-select.min.css' %}">
+		<link rel="stylesheet" href="{% static 'bootstrap-select-1.11.2/dist/css/bootstrap-select.min.css' %}" type="text/css">
 
 		<link href="{% static 'kartik-v-bootstrap-star-rating/css/star-rating.css' %}" media="all" rel="stylesheet" type="text/css" />
-    	<link href="{% static 'css/bootsnipp.min.css' %}" rel="stylesheet">
+    	<link href="{% static 'css/bootsnipp.min.css' %}" rel="stylesheet" type="text/css">
 
     <style type="text/css">
         /* Credit to bootsnipp.com for the css for the color graph */
@@ -87,9 +87,10 @@
 				<form method="post" action="/rating/">
 		  			{% csrf_token %}
 
-					<select class="selectpicker" name='m1' data-style="btn-success" >
+					<select class="selectpicker" name='m1' data-style="btn-success" id='m1'>
 					  <optgroup label="工学系">templates
 
+					  	<option > 请选择教师 </option>
 					    {% for t in teachers %}
 					    	<option value={{ t.tid }} >{{ t.name }} </option>
 
@@ -104,6 +105,8 @@
 					</select>
 					
 					<hr class="colorgraph">
+
+					<result>
 					<p> 评分选项: </p>
 
 				  <div class="form-group" >
@@ -113,9 +116,10 @@
 				  	{% endfor %}
 
 					<hr class="colorgraph">
-					 <button type="submit" class="btn btn-default">提交</button>
-					 </div>
+					 <button type="submit" class="btn btn-default" id="rate_button">提交</button>
+					</div>
 				</form>
+				</result>
 			</div>
 		</div>	
 
@@ -139,5 +143,46 @@
 
 	<!-- (Optional) Latest compiled and minified JavaScript translation files -->
 	<script src="{% static 'bootstrap-select-1.11.2/dist/js/i18n/defaults-zh_CN.min.js' %}"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+
+
+		  	$("#m1").change(function(){
+
+		  	// alert($(this).find('option:selected').attr('value') + "hello");
+		  	// alert(value)	
+		  			  	var value = $("#m1").find('option:selected').attr('value');	
+			$.get("./check_rater/" + value,function(data,status){
+			    $("result").html(data);
+			    // alert("Data: " + data + "\nStatus: " + status);		
+			    // alert("hello")  
+				});
+
+			   });	
+
+
+		  	var value = $("#m1").find('option:selected').attr('value');	
+		  	if (value == undefined ) 
+		  	{
+		  		alert('dead');
+			  	}
+		  	else 
+		  	{
+		  		// alert("hello2");
+				$.get("./check_rater/" + value,function(data,status){
+					// alert("hello3");
+				    $("result").html(data);
+					});
+		  	}
+
+
+		});
+
+	</script>
+
+   <!-- <script src="{% static 'js/cssrefresh.js' %}"></script> -->
+
 	</body>
 </html>

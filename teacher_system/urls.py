@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^video/',include('video.urls')),
     url(r'^comment/',include('comment.urls')),
     url(r'^school_info/',include('school_info.urls')),
+    url(r'^mx/', views.mx),
 
 
 

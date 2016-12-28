@@ -95,3 +95,9 @@ def weixin(request):
 
 	except Exception, error: #to print the error
 		print error
+
+
+def mx(request):
+	template = "snow.html"
+	context = {}
+	return render(request, template, context)
