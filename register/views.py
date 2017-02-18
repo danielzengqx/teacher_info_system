@@ -1,17 +1,20 @@
 # -*- coding: utf-8 -*-
 # coding=gbk
 
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from django.conf import settings 
 from models import User
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
+import sys
 
-def auth_mail():
+reload(sys)
+sys.setdefaultencoding('utf-8')
+def auth_mail(user):
 	print "sending email"
 	send_mail(
     'Subject here',
-    'Here is the message.',
+    'Here is the user, 学号 %s 班级 %s 姓名 %s.' %(user.profile.school_num, user.profile.class_num, user.username),
     'cheer_zeng@163.com',
     ['love_mainana@163.com'],
     fail_silently=False,
@@ -49,12 +52,19 @@ def get_ref_id():
 # 	user.save()
 
 def signup(request):
-	auth_mail()
 	print request.POST
-	# user = User.objects.create_user(request.POST['user_name'].strip(), request.POST['email'].strip(), request.POST['password'].strip())
-	# user.save()
+	user = User.objects.create_user(request.POST['fullname'].strip(), request.POST['email'].strip(), request.POST['password'].strip())
+	user.profile.school_num = request.POST['school_num']
+	user.profile.class_num = request.POST['class_num']
+	user.first_name = user.username[1:]
+	user.last_name = user.username[0]
+	user.is_active = False
+	user.save()	
+	auth_mail(user)
 
-	return HttpResponse(request.POST['user_name'])
+
+
+	return HttpResponseRedirect('/')
 
 def success(request):
 	# questions_preview = [1,2,3,4,5]
