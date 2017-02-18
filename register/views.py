@@ -3,7 +3,7 @@
 
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from django.conf import settings 
-from models import User
+# from models import User
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 import sys
