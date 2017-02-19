@@ -87,12 +87,12 @@
 				<form method="post" action="/rating/">
 		  			{% csrf_token %}
 
-					<select class="selectpicker" name='m1' data-style="btn-success" id='m1'>
+					<select class="selectpicker" name='m1' data-style="btn-success" id='m1'	>
 					  <optgroup label="工学系">templates
 
 					  	<option > 请选择教师 </option>
 					    {% for t in teachers %}
-					    	<option value={{ t.tid }} >{{ t.name }} </option>
+					    	<option value={{ t.id }} >{{ t.name }} </option>
 
 					    {% endfor %}
 					  </optgroup>
@@ -110,9 +110,9 @@
 					<p> 评分选项: </p>
 
 				  <div class="form-group" >
-				  	{% for content in score_contents %}
-						<label for={{  forloop.counter0 }} class="control-label"> {{ content }} </label>
-						<input id='rating_{{ forloop.counter0 }}' name='rating_{{ forloop.counter0 }}' class="rating" data-min="0" data-max='10' data-step="1" data-language='zh'>
+				  	{% for item in score_contents %}
+						<label for={{  item.id }} class="control-label"> {{ item.content }} </label>
+						<input id='raint_{{ item.id }}' name='rating_{{ item.id }}' class="rating" data-min="0" data-max='10' data-step="1" data-language='zh'>
 				  	{% endfor %}
 
 					<hr class="colorgraph">

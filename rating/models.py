@@ -70,12 +70,29 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
+
+@python_2_unicode_compatible  # only if you need to support Python 2
+class Course(models.Model):
+    name = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name
+
+
+    class Meta:
+        ordering = ('name',)
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # bio = models.TextField(max_length=500, blank=True)
+
+    #For Student User
     school_num = models.CharField(max_length=30, blank=True)
     class_num = models.CharField(max_length=30, blank=True)
 
+    #For Teacher User
+    work_id = models.CharField(max_length=30, blank=True)
+    gender = models.CharField(max_length=30, blank=True)
+    all_courses = models.ManyToManyField(Course)
 
 @receiver(post_save, sender=User) 
 def create_user_profile(sender, instance, created, **kwargs): 
@@ -85,3 +102,85 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs): 
     instance.profile.save()
+
+
+
+class RatingItem(models.Model):
+    content = models.CharField(max_length=100, default='')
+
+
+    def __str__(self):
+        return self.content
+
+    class Meta:
+        ordering  = ('content', )
+
+
+class ItemScore(models.Model):
+    item = models.ForeignKey(RatingItem, on_delete=models.CASCADE)
+    score = models.FloatField(default=0)
+    rater = models.CharField(max_length=30, default='')
+
+    def __str__(self):
+        return str(self.item) + ' ' + str(self.score) + ' ' + str(self.rater)
+
+    class Meta:
+        ordering  = ('item','score', 'rater', )
+
+class Teacher2(models.Model):
+    name = models.CharField(max_length=30, default='')
+    major = models.CharField(max_length=200, default='工学系')
+    intro = models.TextField(default='个人简介，待补充')
+    stars_filled = models.CharField(max_length=5, default='x')
+    stars_empty = models.CharField(max_length=5, default='yyyy')
+    score_total = models.FloatField(default=0)
+    score_rater = models.CharField(max_length=5000, default='[1]')
+
+    def add_rater(self, rater):
+        tmp = json.loads(self.score_rater)
+        tmp.append(rater)
+        self.score_rater = json.dumps(tmp)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ('name',)
+
+
+class RatingForTeacher(models.Model):
+    teacher = models.ForeignKey(Teacher2, on_delete=models.CASCADE)
+    item_score = models.ManyToManyField(ItemScore)
+
+
+    def __str__(self):
+        return str(self.teacher)
+
+    class Meta:
+        ordering = ('teacher',)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

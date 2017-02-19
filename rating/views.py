@@ -2,11 +2,12 @@
 # coding=gbk
 from __future__ import division 
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
-from models import Teacher
+from models import Teacher2, RatingItem, ItemScore, RatingForTeacher
 # Create your views here.
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_page
 import json
+import re
 @login_required(login_url='/rating/redirect/')
 def rating(request):
 	user = request.user.username
@@ -18,100 +19,82 @@ def rating(request):
 		print "here is rating post %s" %request.POST
 
 		tid = request.POST['m1']
-		s1 = int(request.POST['rating_0'])
-		s2 = int(request.POST['rating_1'])
-		s3 = int(request.POST['rating_2'])
-		s4 = int(request.POST['rating_3'])
-		s5 = int(request.POST['rating_4'])
-		s6 = int(request.POST['rating_5'])
-		s7 = int(request.POST['rating_6'])
-		s8 = int(request.POST['rating_7'])
-		s9 = int(request.POST['rating_8'])
-		s10 = int(request.POST['rating_9'])
+		teacher = Teacher2.objects.get(id=tid)
 
-		print "Here is the scores ", s1, s2, s3, s4, type(tid)
+		try:
+			rating_for_teacher = RatingForTeacher.objects.get(teacher = teacher)
 
-		teacher = Teacher.objects.get(tid=tid)
+		except Exception as e:
+			print "Get rating for teacher failed, init one"
+			rating_for_teacher = RatingForTeacher(teacher = teacher)
+			rating_for_teacher.save()
 
-		print "score 1 before %s" %teacher.score1
+		print "teacher id: %s" %tid
+		for k, v in request.POST.items():
+			result = re.search(r'rating_(\d+)', k)
+			if result:
+				score = int(v)
+				print k, v, score
 
-		teacher.score1 = teacher.score1 * teacher.score1_count
+				item_id =result.group(1)
+				print "rating_id: %s" %item_id
 
-		print "score 1 before2 %s" %teacher.score1
+				print "teacher name: %s" %teacher.name
 
-		teacher.score2 = teacher.score2 * teacher.score2_count
+				rating_item = RatingItem.objects.get(id=item_id)
+				try:
+					item_score = ItemScore(item = rating_item, score=score, rater=user)
+					item_score.save()
+					print "ItemScore saved, item: %s, score: %s, rater: %s" %(rating_item, score, user)
+				except Exception as e:
+					print "Init ItemScore failed, Reason, ", e
+					print "try to change an existed one"
 
-		print "score 2 before %s" %teacher.score2
-		teacher.score3 = teacher.score3 * teacher.score3_count
-		teacher.score4 = teacher.score4 * teacher.score4_count
-		teacher.score5 = teacher.score5 * teacher.score5_count
-		teacher.score6 = teacher.score6 * teacher.score6_count
-		teacher.score7 = teacher.score7 * teacher.score7_count
-		teacher.score8 = teacher.score8 * teacher.score8_count
-		teacher.score9 = teacher.score9 * teacher.score9_count
-		teacher.score10 = teacher.score10 * teacher.score10_count
 
- 		teacher.score1_count = teacher.score1_count + 1
- 		teacher.score2_count = teacher.score2_count + 1
- 		teacher.score3_count = teacher.score3_count + 1
- 		teacher.score4_count = teacher.score4_count + 1
- 		teacher.score5_count = teacher.score5_count + 1
- 		teacher.score6_count = teacher.score6_count + 1
- 		teacher.score7_count = teacher.score7_count + 1
- 		teacher.score8_count = teacher.score8_count + 1
- 		teacher.score9_count = teacher.score9_count + 1
- 		teacher.score10_count = teacher.score10_count + 1
 
-		print "score 1 count  %s" %teacher.score1_count
-		# print "teacher %s name is %s" %(tid, teacher.name)
-		teacher.score1 = (teacher.score1 + s1) / teacher.score1_count
 
-		print "score 1 after %s" %teacher.score1
+				try:
+					rating_for_teacher.item_score.add(item_score)
+					rating_for_teacher.save()
+				except Exception as e:
+					print "Add for item failed, create one"
+					rating_for_teacher.item_score.create(item_score)
+					rating_for_teacher.save()
 
-		teacher.score2 = (teacher.score2 + s2) / teacher.score2_count
-		print "score 2 after %s" %teacher.score2
 
-		teacher.score3 = (teacher.score3 + s3) / teacher.score3_count
-		teacher.score4 = (teacher.score4 + s4) / teacher.score4_count
-		teacher.score5 = (teacher.score5 + s5) / teacher.score5_count
-		teacher.score6 = (teacher.score6 + s6) / teacher.score6_count
-		teacher.score7 = (teacher.score7 + s7) / teacher.score7_count
-		teacher.score8 = (teacher.score8 + s8) / teacher.score8_count
-		teacher.score9 = (teacher.score9 + s9) / teacher.score9_count
-		teacher.score10 = (teacher.score10 + s10) / teacher.score10_count
-		teacher.score_total =   teacher.score1 + teacher.score2 + teacher.score3 + teacher.score4 + teacher.score5 + teacher.score6 + teacher.score7 + teacher.score8 + teacher.score9 + teacher.score10
+		teacher.score_total  = 0
+		for item_score in rating_for_teacher.item_score.all():
+			score = item_score.score
+			print "score: %s" %score
+
+			teacher.score_total  += score
+			print "total score %s" %teacher.score_total
+
 		stars = int(round(teacher.score_total /100 * 5 ))
 		teacher.stars_filled = stars * 'x'
 		teacher.stars_empty = (5 - stars) * 'x'
-		# print teacher.score_rater
-		# print type(json.loads(teacher.score_rater))
+
 		teacher.add_rater(user)
-
-		print "here is stars %s, stars_filled %s, stars_empty %s" %(stars, teacher.stars_filled, teacher.stars_empty)
-
-
-		print teacher.score_total
 		teacher.save()
+
+
 		return HttpResponseRedirect("/teacher_info/detail/%s" %tid)
 		# return test_cache(request)
 
 
-	teachers =  Teacher.objects.all()
+	teachers =  Teacher2.objects.all()
 	# for t in teachers:
 	# 	print "here is teacher %s, name %s" %(t.tid, t.name)
 
 	score_contents = list()
-	score_contents.append(teachers[0].score1_content)
-	score_contents.append(teachers[0].score2_content)
-	score_contents.append(teachers[0].score3_content)
-	score_contents.append(teachers[0].score4_content)
-	score_contents.append(teachers[0].score5_content)
-	score_contents.append(teachers[0].score6_content)
-	score_contents.append(teachers[0].score7_content)
-	score_contents.append(teachers[0].score8_content)
-	score_contents.append(teachers[0].score9_content)
-	score_contents.append(teachers[0].score10_content)		
+	for i in RatingItem.objects.all():
+		score_contents.append(i.content)
+	
 
+	def getKey(custom):
+		return custom.id
+
+	score_contents = sorted(RatingItem.objects.all(), key=getKey)
 	# for i in score_contents:
 	# 	print i
 	template = "rating.html"
@@ -161,14 +144,14 @@ def test_cache(request):
 def check_rater(request, tid):
 	user = request.user.username
 	email = request.user.email
-	teacher = Teacher.objects.get(tid=tid)
+	teacher = Teacher2.objects.get(id=tid)
 	print teacher.score_rater
 	print "hererere"
 	if user in json.loads(teacher.score_rater):
 		print "in here"
 		return HttpResponse("<p>您已对该教师进行过评分</p>")
 	else:
-		teachers =  Teacher.objects.all()
+		teachers =  Teacher2.objects.all()
 	# for t in teachers:
 	# 	print "here is teacher %s, name %s" %(t.tid, t.name)
 		template = "rating_form.html"
