@@ -38,18 +38,7 @@ def get_ref_id():
 	except:
 		return ref_id
 
-#daniel made
-# def signup(request):
-# 	# context = {'username':user_name}
-# 	template = "register.html"
-# 	print "here is post" , request.POST
 
-# 	user = User()
-# 	user.name = request.POST['user_name']
-# 	user.passwd = request.POST['password']
-# 	user.email = request.POST['email']
-# 	user.u_id = request.POST['uid']
-# 	user.save()
 
 def signup(request):
 	print request.POST

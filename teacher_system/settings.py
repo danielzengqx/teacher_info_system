@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'rating',
     'video',
     'comment',
-    'school_info'
+    'school_info',
+    'teacher_account'
 ]
 
 MIDDLEWARE = [
