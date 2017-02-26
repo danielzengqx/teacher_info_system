@@ -72,8 +72,22 @@ from django.dispatch import receiver
 
 
 @python_2_unicode_compatible  # only if you need to support Python 2
+class Class(models.Model):
+    name = models.CharField(max_length=30)
+    num_stu = models.IntegerField(default=30)
+
+    def __str__(self):
+        return self.name
+
+
+    class Meta:
+        ordering = ('name','num_stu')
+
+
+@python_2_unicode_compatible  # only if you need to support Python 2
 class Course(models.Model):
     name = models.CharField(max_length=30)
+    # class_name = models.ManyToManyField(Class)
 
     def __str__(self):
         return self.name
@@ -81,6 +95,21 @@ class Course(models.Model):
 
     class Meta:
         ordering = ('name',)
+
+@python_2_unicode_compatible  # only if you need to support Python 2
+class CourseForClass(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    class_name = models.ForeignKey(Class, on_delete=models.CASCADE)
+    room = models.CharField(max_length=30, blank=True)
+
+    def __str__(self):
+        return str(self.course) + ' ' + str(self.class_name)
+
+
+    class Meta:
+        ordering = ('course', 'class_name')
+        unique_together = ("course", "class_name", )
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -92,7 +121,7 @@ class Profile(models.Model):
     #For Teacher User
     work_id = models.CharField(max_length=30, blank=True)
     gender = models.CharField(max_length=30, blank=True)
-    all_courses = models.ManyToManyField(Course)
+    # all_courses = models.ManyToManyField(Course)
 
 @receiver(post_save, sender=User) 
 def create_user_profile(sender, instance, created, **kwargs): 
@@ -135,10 +164,14 @@ class Teacher2(models.Model):
     stars_empty = models.CharField(max_length=5, default='yyyy')
     score_total = models.FloatField(default=0)
     score_rater = models.CharField(max_length=5000, default='[1]')
-
+    rater_count = models.IntegerField(default=0)
+    work_id = models.CharField(max_length=30, blank=True)
+    all_courses = models.ManyToManyField(CourseForClass)
+    
     def add_rater(self, rater):
         tmp = json.loads(self.score_rater)
         tmp.append(rater)
+        self.rater_count = len(tmp)- 1
         self.score_rater = json.dumps(tmp)
 
     def __str__(self):

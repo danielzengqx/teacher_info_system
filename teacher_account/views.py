@@ -2,10 +2,13 @@
 # coding=gbk
 
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
-from rating.models import User
+from rating.models import User, Profile, Teacher2
 # Create your views here.
+import inspect
 
-# Create your views here.
+def lineno():
+    """Returns the current line number in our program."""
+    return inspect.currentframe().f_back.f_lineno
 def register(request):
 	context = {}
 	template = "teacher_signup.html"
@@ -36,3 +39,78 @@ def success(request):
 	template = "register.html"
 
 	return HttpResponse("Success")	
+
+
+def setting(request):
+	template = "setting.html"
+
+
+	# wid = request.user.wid
+	profile = Profile.objects.get(user=request.user)
+
+
+	work_id = profile.work_id
+	# return HttpResponseRedirect('/')
+	if work_id:
+		return HttpResponseRedirect("my_page/%s" %work_id)	
+	else:
+		return HttpResponse("Not a Teacher, please go back")	
+
+
+def my_page(request, work_id):
+	template = "my_page.html"
+	# work_id = '20170002'
+
+	profile = Profile.objects.get(work_id=work_id)
+	try:
+		teacher =  Teacher2.objects.get(work_id=work_id)
+
+	except Exception as e:
+		print lineno(), "Failed Reason, ", e
+		HttpResponse("不存在该资源")
+
+
+
+	score_total_percent = format(teacher.score_total/100,'.0%')
+	context = {	
+				"name": teacher.name,
+				"major": teacher.major,
+				'count': teacher.rater_count,
+				"intro": teacher.intro,
+				"score_total": int(round(teacher.score_total, 1)),
+				"score_total_percent": score_total_percent,
+				"courses": teacher.all_courses.all()
+
+				}
+
+
+	return render(request,template, context)
+
+
+def edit_page(request, work_id):
+	template = "my_page.html"
+	# work_id = '20170002'
+
+	profile = Profile.objects.get(work_id=work_id)
+	try:
+		teacher =  Teacher2.objects.get(work_id=work_id)
+
+	except Exception as e:
+		print lineno(), "Failed Reason, ", e
+		HttpResponse("不存在该资源")
+
+
+
+	score_total_percent = format(teacher.score_total/100,'.0%')
+	context = {	
+				"name": teacher.name,
+				"major": teacher.major,
+				'count': teacher.rater_count,
+				"intro": teacher.intro,
+				"score_total": int(round(teacher.score_total, 1)),
+				"score_total_percent": score_total_percent
+
+				}
+
+
+	return render(request,template, context)

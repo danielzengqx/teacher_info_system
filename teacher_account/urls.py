@@ -21,5 +21,10 @@ urlpatterns = [
     url(r'^$',views.register, name='register'),
     url(r'^signup$',  views.signup, name='signup'),
     url(r'^success',views.success, name='success'),
+    url(r'^setting',views.setting, name='setting'),
+    url(r'^my_page/(?P<work_id>\d+)',views.my_page, name='my_page'),
+    url(r'^my_page/(?P<work_id>\d+)/edit',views.edit_page, name='edit_page'),
+
+
 
 ]
