@@ -663,7 +663,7 @@ opacity:0.9;
             </li>
         </ul>
     </div> -->
-        <div class=".col-xs-6 .col-sm-4 .col-md-2 .col-md-offset-8 .col-sm-offset-8"><a href="/" class="btn btn-success btn-xs">编辑个人主页</a></div>
+        <div class=".col-xs-6 .col-sm-4 .col-md-2 .col-md-offset-8 .col-sm-offset-8"><a href="{{teacher.work_id}}/edit" class="btn btn-success btn-xs">编辑个人主页</a></div>
 
     <div class="col-sm-9">
         
@@ -688,9 +688,9 @@ opacity:0.9;
 
                               <li class="list-group-item">{{ name }} </li>
                               <li class="list-group-item">{{ major }} </li>
-                              <li class="list-group-item">Google Inc. </li>
-                              <li class="list-group-item"><i class="fa fa-phone"></i> 000-000-0000 </li>
-                              <li class="list-group-item"><i class="fa fa-envelope"></i> john@example.com</li>
+                              <!-- <li class="list-group-item"> </li> -->
+                              <li class="list-group-item"><i class="fa fa-phone"></i>{{ phone }} </li>
+                              <li class="list-group-item"><i class="fa fa-envelope"></i>{{ email }}</li>
                            </ul>
                         </div>
                      </div>
@@ -805,7 +805,7 @@ opacity:0.9;
                            <td>{{ course.course }}</td>
                            <td> {{ course.class_name }} </td>
                            <td> {{ course.room }} </td>
-                           <td> {{course.class_name.num_stu}} </td>
+                           <td> {{ course.class_name.num_stu }} </td>
 
                         </tr>
                       {% endfor %}

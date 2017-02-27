@@ -2,7 +2,7 @@
 # coding=gbk
 from __future__ import division
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
-from rating.models import Teacher2, RatingForTeacher
+from rating.models import Teacher2, RatingForTeacher, Profile
 # Create your views here.
 from django.contrib.auth.decorators import login_required
 import inspect
@@ -111,15 +111,21 @@ def teacher_detail(request, id):
 
 	template = "profile.html"
 
+	profile = Profile.objects.get(work_id=teacher.work_id)
 
+	print "email ", profile.user.email
 	score_total_percent = format(teacher.score_total/100,'.0%')
 	context = {	
+				"teacher": teacher,
 				"name": teacher.name,
 				"major": teacher.major,
+				"email": profile.user.email,
 				'count': teacher.rater_count,
 				"intro": teacher.intro,
 				"score_total": int(round(teacher.score_total, 1)),
-				"score_total_percent": score_total_percent
+				"score_total_percent": score_total_percent,
+				"courses": teacher.all_courses.all()
+
 
 				}
 

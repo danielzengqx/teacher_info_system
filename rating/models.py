@@ -69,19 +69,26 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+@python_2_unicode_compatible  # only if you need to support Python 2
+class Major(models.Model):
+    name = models.CharField(max_length=30, default="工学系")
 
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ('name',)
 
 @python_2_unicode_compatible  # only if you need to support Python 2
 class Class(models.Model):
     name = models.CharField(max_length=30)
     num_stu = models.IntegerField(default=30)
-
+    major = models.ForeignKey(Major, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
 
-
     class Meta:
-        ordering = ('name','num_stu')
+        ordering = ('name','num_stu',)
 
 
 @python_2_unicode_compatible  # only if you need to support Python 2
@@ -102,13 +109,14 @@ class CourseForClass(models.Model):
     class_name = models.ForeignKey(Class, on_delete=models.CASCADE)
     room = models.CharField(max_length=30, blank=True)
 
+
     def __str__(self):
         return str(self.course) + ' ' + str(self.class_name)
 
 
     class Meta:
         ordering = ('course', 'class_name')
-        unique_together = ("course", "class_name", )
+        unique_together = ("course", "class_name",)
 
 
 class Profile(models.Model):
@@ -158,7 +166,7 @@ class ItemScore(models.Model):
 
 class Teacher2(models.Model):
     name = models.CharField(max_length=30, default='')
-    major = models.CharField(max_length=200, default='工学系')
+    major = models.ForeignKey(Major, on_delete=models.CASCADE)
     intro = models.TextField(default='个人简介，待补充')
     stars_filled = models.CharField(max_length=5, default='x')
     stars_empty = models.CharField(max_length=5, default='yyyy')
@@ -166,6 +174,7 @@ class Teacher2(models.Model):
     score_rater = models.CharField(max_length=5000, default='[1]')
     rater_count = models.IntegerField(default=0)
     work_id = models.CharField(max_length=30, blank=True)
+    phone = models.CharField(max_length=30, blank=True)    
     all_courses = models.ManyToManyField(CourseForClass)
     
     def add_rater(self, rater):
@@ -195,9 +204,17 @@ class RatingForTeacher(models.Model):
 
 
 
+class Student(models.Model):
+    profile = models.OneToOneField(User, on_delete=models.CASCADE)
+    major = models.CharField(max_length=200, default='工学系')
+    class_name = models.ForeignKey(Class, on_delete=models.CASCADE)
 
 
+    def __str__(self):
+        return self.profile.name
 
+    class Meta:
+        ordering = ('profile','major', 'class_name')
 
 
 

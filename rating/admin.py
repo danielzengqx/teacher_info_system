@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Teacher, Course, Class, CourseForClass, Teacher2, RatingItem, ItemScore, RatingForTeacher
+from .models import Teacher, Course, Major, Class, CourseForClass, Teacher2, RatingItem, ItemScore, RatingForTeacher, Student
 
 class TeacherAdmin(admin.ModelAdmin):
     list_display = ('name', )
@@ -10,12 +10,17 @@ class TeacherAdmin(admin.ModelAdmin):
 class CourseAdmin(admin.ModelAdmin):
     list_display = ('name', )
 
+class MajorAdmin(admin.ModelAdmin):
+    list_display = ('name',  )
+
 class ClassAdmin(admin.ModelAdmin):
     list_display = ('name', 'num_stu', )
 
 class CourseForClassAdmin(admin.ModelAdmin):
     list_display = ('course', 'class_name', )
 
+class StudentAdmin(admin.ModelAdmin):
+    list_display = ('profile', 'major', 'class_name', )
 
 class Teacher2Admin(admin.ModelAdmin):
     list_display = ('name', )
@@ -32,9 +37,11 @@ class RatingForTeacherAdmin(admin.ModelAdmin):
 
 admin.site.register(Teacher, TeacherAdmin)
 admin.site.register(Course, TeacherAdmin)
+admin.site.register(Major, MajorAdmin)
 admin.site.register(Class, ClassAdmin)
 admin.site.register(CourseForClass, CourseForClassAdmin)
 admin.site.register(Teacher2, TeacherAdmin)
+admin.site.register(Student, StudentAdmin)
 admin.site.register(RatingItem, RatingItemAdmin)
 admin.site.register(ItemScore, ItemScoreAdmin)
 admin.site.register(RatingForTeacher, RatingForTeacherAdmin)
