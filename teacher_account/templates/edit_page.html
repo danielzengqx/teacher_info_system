@@ -10,19 +10,19 @@
     <style type="text/css">
         
     </style>
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
 </head>
 <body>
-<div class="container" style="padding-top: 60px;">
-  <h1 class="page-header">编辑个人信息</h1>
+<div class="container">
+  <h1 class="page-header" style="margin-top: 0px;">编辑个人信息</h1>
   <div class="row">
     <!-- left column -->
     <div class="col-md-4 col-sm-6 col-xs-12">
       <div class="text-center">
         <img src="{%static 'img/dog.jpeg' %}" class="avatar img-circle img-thumbnail" alt="avatar">
-        <h6>上传新的照片...</h6>
-        <input type="file" class="text-center center-block well well-sm">
+        <!-- <h6>上传新的照片...</h6> -->
+        <!-- <input type="file" class="text-center center-block well well-sm"> -->
       </div>
     </div>
     <!-- edit form column -->
@@ -32,7 +32,7 @@
         <i class="fa fa-coffee"></i>
         This is an <strong>.alert</strong>. Use this to show important messages to the user.
       </div> -->
-      <h3>个人信息 {{ teacher.name }}</h3>
+      <h3>个人信息: {{ teacher.name }}</h3>
 
       <form method="post" action="/teacher_account/my_page/change_profile/{{teacher.work_id}}" class="form-horizontal" role="form">   
         {% csrf_token %}

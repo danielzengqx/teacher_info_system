@@ -1,14 +1,25 @@
 from django.shortcuts import render
-
+from .models import Comment
 # Create your views here.
 def comment(request):
 	template = "comment_simple.html"
 
+	if request.POST:
+		content = request.POST["comment"]
+		author = request.user.username
+		comment =  Comment(content=content, author=author)
+
+		comment.save()
+
+
+
+
+	comments = Comment.objects.all().order_by('time')
+
+
 	context = {
-				# "username": user, 
-				# "email": email,
-				# "teachers": teachers,
-				# "score_contents": score_contents
+				"comments": comments[::-1],
+
 				}
 
 

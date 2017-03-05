@@ -588,7 +588,7 @@ opacity:0.9;
 
 
 <!-- nav bar -->
-<nav class="navbar navbar-fixed-bottom navbar-bootsnipp animate" role="navigation" style="z-index: 9999999">
+<nav class="navbar navbar-fixed-top navbar-bootsnipp animate" role="navigation" style="z-index: 9999999">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -610,7 +610,6 @@ opacity:0.9;
         <li>
           <a href="/" >主页 </a>  
           <a href="/rating" >评分 </a>
-          <a href="/logout" >注销 </a>
         </li>
       </ul>
     </div>
@@ -626,7 +625,7 @@ opacity:0.9;
     <div class="col-sm-9">
         
         <!-- resumt -->
-        <div class="panel panel-default">
+<!--         <div class="panel panel-default">
                <div class="panel-heading resume-heading">
                   <div class="row">
                      <div class="col-lg-12">
@@ -638,23 +637,30 @@ opacity:0.9;
                               
                            </div>
                         </div>
-
-
-                        <div class="col-xs-12 col-sm-8">
-                           <ul class="list-group">
-
-                              <li class="list-group-item">{{ student.profile }} </li>
-
-                              <li class="list-group-item">{{ student.major }} </li>
-                              <!-- <li class="list-group-item"> </li> -->
-                              <li class="list-group-item">{{ student.class_name }}</li>
-                              <li class="list-group-item"><i class="fa fa-envelope"></i>{{ student.profile.email }} </li>
-
-
-                           </ul>
-                        </div>
                      </div>
                   </div>
+               </div>
+          </div> -->
+
+               <div class="bs-callout bs-callout-danger">
+                  <h4>基本信息</h4>
+                  <p>
+                        <!-- <div class="col-xs-12 col-sm-8"> -->
+                           <ul class="list-group">
+                              <label>用户名：</label>
+                              <li class="list-group-item">{{ student.profile }} </li>
+                              <label>姓名：</label>
+                              <li class="list-group-item">{{student.profile.first_name}}{{student.profile.last_name}}</li>
+                              <label>学院：</label>
+                              <li class="list-group-item">{{ student.major }} </li>
+                              <label>班级：</label>
+                              <li class="list-group-item">{{ student.class_name }}</li>
+                              <label>邮箱：</label>
+                              <li class="list-group-item"><i class="fa fa-envelope"></i>{{ student.profile.email }}</li>
+                           </ul>
+                        <!-- </div> -->
+
+                  </p>
                </div>
 
                <div class="bs-callout bs-callout-danger">
@@ -671,7 +677,7 @@ opacity:0.9;
                      {% for k, v in courses_teachers.iteritems %}
                         <tr>
                            <td>{{ v.course }}</td>
-                           <td> {{ k }} </td>
+                           <td><a href="/teacher_info/detail/{{ k.id }}" >{{ k.name }}</a> </td>
                            <!-- <td> {{ v.class_name }} </td> -->
                            <td> {{ v.room }} </td>
 

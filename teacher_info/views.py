@@ -120,6 +120,12 @@ def teacher_detail(request, id):
 
 	# print "email ", profile.user.email
 	score_total_percent = format(teacher.score_total/100,'.0%')
+
+	ranking = 1
+	for t in Teacher2.objects.all():
+		if t.score_total < teacher.score_total:
+			ranking += 1
+
 	context = {	
 				"teacher": teacher,
 				"name": teacher.name,
@@ -129,6 +135,7 @@ def teacher_detail(request, id):
 				"intro": teacher.intro,
 				"score_total": int(round(teacher.score_total, 1)),
 				"score_total_percent": score_total_percent,
+				"ranking": ranking,
 				"courses": teacher.all_courses.all()
 
 

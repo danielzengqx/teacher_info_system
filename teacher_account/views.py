@@ -156,9 +156,9 @@ def change_profile(request, work_id):
 			HttpResponse("不存在该资源")
 
 
-		return HttpResponse("/")
+		return HttpResponseRedirect("/teacher_account/setting")
 
-		return render(request,template, context)
+		# return render(request,template, context)
 
 
 ## For Student Account ###
@@ -188,7 +188,7 @@ def stu_page(request, school_num):
 	for course in courses:
 		for teacher in Teacher2.objects.all():
 			if course in teacher.all_courses.all():
-				course_t[teacher.name] = course
+				course_t[teacher] = course
 
 	for k, v in course_t.items():
 		print k, v

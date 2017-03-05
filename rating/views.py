@@ -63,19 +63,22 @@ def rating(request):
 
 
 		teacher.add_rater(user)
-		teacher.score_total  = 0
+		score_total  = 0
 		for item_score in rating_for_teacher.item_score.all():
 			score = item_score.score
 			print "score: %s" %score
 
-			teacher.score_total  += score
-			print "total score %s" %teacher.score_total
+			score_total  += score
+			print "total score %s" %score_total
+
 
 		print "rater_count", teacher.rater_count
-		stars = int(round(teacher.score_total / teacher.rater_count/ 100 * 5 ))
+		print "before %s, this time %s" %(teacher.score_total, score_total)
+		teacher.score_total = score_total /  teacher.rater_count
+
+		stars = int(round(teacher.score_total/ 100 * 5 ))
 		teacher.stars_filled = stars * 'x'
 		teacher.stars_empty = (5 - stars) * 'x'
-
 		teacher.save()
 		print "stars", stars
 
@@ -97,7 +100,7 @@ def rating(request):
 	teachers =  Teacher2.objects.all()
 	# for t in teachers:
 	# 	print "here is teacher %s, name %s" %(t.tid, t.name)
-
+ 
 	score_contents = list()
 	for i in RatingItem.objects.all():
 		score_contents.append(i.content)
@@ -169,16 +172,16 @@ def check_rater(request, tid):
 		template = "rating_form.html"
 
 		score_contents = list()
-		score_contents.append(teachers[0].score1_content)
-		score_contents.append(teachers[0].score2_content)
-		score_contents.append(teachers[0].score3_content)
-		score_contents.append(teachers[0].score4_content)
-		score_contents.append(teachers[0].score5_content)
-		score_contents.append(teachers[0].score6_content)
-		score_contents.append(teachers[0].score7_content)
-		score_contents.append(teachers[0].score8_content)
-		score_contents.append(teachers[0].score9_content)
-		score_contents.append(teachers[0].score10_content)	
+		for i in RatingItem.objects.all():
+			score_contents.append(i.content)
+	
+
+		def getKey(custom):
+			return custom.id
+
+
+
+		score_contents = sorted(RatingItem.objects.all(), key=getKey)
 
 		context = {
 					"score_contents": score_contents

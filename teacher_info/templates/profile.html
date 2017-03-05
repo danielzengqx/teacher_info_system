@@ -509,64 +509,6 @@ opacity:0.9;
 }
 
 
-/* skill meter in resume. copy pasted from http://bootsnipp.com/snippets/featured/progress-bar-meter */
-/*
-.progress-bar {
-    text-align: left;
-    white-space: nowrap;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	cursor: pointer;
-}
-
-.progress-bar > .progress-type {
-	padding-left: 10px;
-}
-
-.progress-meter {
-	min-height: 15px;
-	border-bottom: 2px solid rgb(160, 160, 160);
-  margin-bottom: 15px;
-}
-
-.progress-meter > .meter {
-	position: relative;
-	float: left;
-	min-height: 15px;
-	border-width: 0px;
-	border-style: solid;
-	border-color: rgb(160, 160, 160);
-}
-
-.progress-meter > .meter-left {
-	border-left-width: 2px;
-}
-
-.progress-meter > .meter-right {
-	float: right;
-	border-right-width: 2px;
-}
-
-.progress-meter > .meter-right:last-child {
-	border-left-width: 2px;
-}
-
-.progress-meter > .meter > .meter-text {
-	position: absolute;
-	display: inline-block;
-	bottom: -20px;
-	width: 100%;
-	font-weight: 700;
-	font-size: 0.85em;
-	color: rgb(160, 160, 160);
-	text-align: left;
-}
-
-.progress-meter > .meter.meter-right > .meter-text {
-	text-align: right;
-}
-*/
 
 /* remove the effect of snip css */
 .bs-callout-danger {
@@ -588,7 +530,7 @@ opacity:0.9;
 
 
 <!-- nav bar -->
-<nav class="navbar navbar-fixed-bottom navbar-bootsnipp animate" role="navigation" style="z-index: 9999999">
+<nav class="navbar navbar-fixed-top navbar-bootsnipp animate" role="navigation" style="z-index: 9999999">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -620,25 +562,24 @@ opacity:0.9;
 
 <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
  -->
-<div class="container">
-<div class="row">
-    <div class="col-sm-9">
-        
-        <!-- resumt -->
-        <div class="panel panel-default">
+<!-- <div class="container" style="margin-top: 0px; border-top: 0px;"  > -->
+<!-- <div class="row"> -->
+    <!-- <div class="col-sm-9"> -->
+        <!-- resume -->
+<!--         <div class="panel panel-default">
                <div class="panel-heading resume-heading">
                   <div class="row">
                      <div class="col-lg-12">
                         <div class="col-xs-12 col-sm-4">
                            <figure>
-                              <img class="img-circle img-responsive" alt="" src="{%static 'img/dog.jpeg' %}">
+                              <img class="img-circle img-responsive" alt="" src="{%static 'img/head.png' %}">
                            </figure>
                            <div class="row">
                               
                            </div>
                         </div>
 
-<!--                         <div class="col-xs-12 col-sm-8">
+                        <div class="col-xs-12 col-sm-8">
                            <ul class="list-group">
                            <div>
                               <label>名字：</label>
@@ -646,7 +587,6 @@ opacity:0.9;
                                 {{ name }} </li>
                                   <label>学院：</label>
                               <li class="list-group-item">{{ major }} </li>
-                              <li class="list-group-item"></li>
                               <label>邮箱：</label>
                               <li class="list-group-item"><i class="fa fa-envelope"></i>{{ email }}</li>
                               <label>电话：</label>
@@ -655,13 +595,13 @@ opacity:0.9;
                               <li class="list-group-item"><i class="fa fa-phone"></i>{{ teacher.phone}}</li>
                               {% endif %}                              
                            </ul>
-                        </div> -->
+                        </div>
 
                      </div>
                   </div>
                </div>
-            </div>
-            
+            </div> -->
+
                <div class="bs-callout bs-callout-danger">
                   <h4>基本信息</h4>
                   <p>
@@ -693,7 +633,7 @@ opacity:0.9;
                </div>
 
                <div class="bs-callout bs-callout-danger">
-                  <h4>总分 <small>评分人数 {{ count }}</small> </h4>
+                  <h4>总分 <small>评分人数 {{ count }},   第<strong> {{ ranking }} </strong>名</small> </h4>
                   <ul class="list-group">
                      <a class="list-group-item inactive-link" href="#">
                      <!-- <label class="control-label" >总分 </label>   -->
@@ -717,11 +657,12 @@ opacity:0.9;
                           </span>
                           </div>
                           <div class="caption">
-                            <span class="label label-success">{{ score_total }}分</span>
+                            <span class="label label-warning">{{ score_total }}分</span>
                           </div>
                       </div>
                      </a>
                   </ul>
+                               <div class=".col-xs-6 .col-sm-4 .col-md-2 .col-md-offset-8 .col-sm-offset-8"><a href="/rating" class="btn btn-success btn-xs">去评分</a></div>  
                </div>
 
                <div class="bs-callout bs-callout-danger">
@@ -751,13 +692,12 @@ opacity:0.9;
                   </table>
                </div>
 
-            </div>
-         </div>
+
         <!-- resume -->
 
-    </div>
-</div>
-</div>
+    <!-- </div> -->
+<!-- </div> -->
+<!-- </div> -->
 
     <script src="{% static 'js/jquery.js' %}"></script>
 
