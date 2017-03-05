@@ -19,11 +19,11 @@ def register(request):
 
 def signup(request):
 	print request.POST
-	user = User.objects.create_user(request.POST['full_name'].strip(), request.POST['email'].strip(), request.POST['password'].strip())
+	user = User.objects.create_user(request.POST['username'].strip(), request.POST['email'].strip(), request.POST['password'].strip())
 	user.profile.work_id = request.POST['work_id']
 	user.profile.gender = request.POST['gender']
-	user.first_name = user.username[1:]
-	user.last_name = user.username[0]
+	user.first_name = request.POST['username'].strip()
+	user.last_name = request.POST['lastname'].strip()
 	# user.is_active = False
 	user.save()	
 	# auth_mail(user)
@@ -71,7 +71,7 @@ def my_page(request, work_id):
 
 	except Exception as e:
 		print lineno(), "Failed Reason, ", e
-		HttpResponse("不存在该资源")
+		return HttpResponse("没有与您工号对应的教师信息， 请与管理员联系， 确保已加入数据库或工号录入正确。")
 
 
 

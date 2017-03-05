@@ -62,6 +62,7 @@ def rating(request):
 					rating_for_teacher.save()
 
 
+		teacher.add_rater(user)
 		teacher.score_total  = 0
 		for item_score in rating_for_teacher.item_score.all():
 			score = item_score.score
@@ -70,13 +71,13 @@ def rating(request):
 			teacher.score_total  += score
 			print "total score %s" %teacher.score_total
 
-		stars = int(round(teacher.score_total /100 * 5 ))
+		print "rater_count", teacher.rater_count
+		stars = int(round(teacher.score_total / teacher.rater_count/ 100 * 5 ))
 		teacher.stars_filled = stars * 'x'
 		teacher.stars_empty = (5 - stars) * 'x'
 
-		teacher.add_rater(user)
 		teacher.save()
-
+		print "stars", stars
 
 		return HttpResponseRedirect("/teacher_info/detail/%s" %tid)
 		# return test_cache(request)

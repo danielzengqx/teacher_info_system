@@ -42,14 +42,15 @@ def get_ref_id():
 
 def signup(request):
 	print request.POST
-	user = User.objects.create_user(request.POST['fullname'].strip(), request.POST['email'].strip(), request.POST['password'].strip())
+	user = User.objects.create_user(request.POST['username'].strip(), request.POST['email'].strip(), request.POST['password'].strip())
 	user.profile.school_num = request.POST['school_num']
 	user.profile.class_num = request.POST['class_num']
-	user.first_name = user.username[1:]
-	user.last_name = user.username[0]	
-	user.is_active = False
+	user.first_name = request.POST["firstname"]
+	user.last_name = request.POST["lastname"]
+	
+	# user.is_active = False
 	user.save()	
-	# auth_mail(user)
+	# auth_mail(usernameer)
 
 
 

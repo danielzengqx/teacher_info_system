@@ -43,7 +43,7 @@
         <a class="navbar-brand animate" href="/">教师评分系统</a>
       </div>
     </div>
-<script src="/js/BSAcpc.js" async=""></script>
+<!-- <script src="/js/BSAcpc.js" async=""></script> -->
 <div class="bsa-apiads hidden-sm hidden-xs"></div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="navbar-collapse collapse out" id="bs-example-navbar-collapse-2" aria-expanded="false" style="">
@@ -68,15 +68,22 @@
 			<!-- <div class="row"> -->
 				<!-- <div class="col-xs-12 col-sm-6 col-md-6"> -->
           <div class="form-group">
+            <input type="text" name="username" id="username" class="form-control input-lg" placeholder="用户名" tabindex="1">
+          </div>          
+          <div class="form-group">
+            <input type="text" name="lastname" id="lastname" class="form-control input-lg" placeholder="姓" tabindex="1">
+          </div>   
+          <div class="form-group">
+            <input type="text" name="firstname" id="firstname" class="form-control input-lg" placeholder="名字" tabindex="1">
+          </div>  
+
+          <div class="form-group">
             <input type="text" name="class_num" id="class_num" class="form-control input-lg" placeholder="班级" tabindex="1">
           </div>         
 					<div class="form-group">
             <input type="text" name="school_num" id="school_num" class="form-control input-lg" placeholder="学号" tabindex="1">
 					</div>
-          <div class="form-group">
-            <input type="text" name="fullname" id="fullname" class="form-control input-lg" placeholder="姓名" tabindex="1">
-          </div>          
-                       
+                                  
 				<!-- </div> -->
 			<!-- </div> -->
 			<div class="form-group">
@@ -200,7 +207,9 @@ $(function(){
   $.formValidator.initConfig({autotip:true,formid:"myform",onerror:function(msg){}});
   $("#password").formValidator({onshow:"请输入密码",onfocus:"密码应该为6-20位之间"}).inputValidator({min:6,max:20,onerror:"密码应该为6-20位之间"});
   $("#pwdconfirm").formValidator({onshow:"请输入确认密码",onfocus:"密码应该为6-20位之间",oncorrect:"密码一致"}).compareValidator({desid:"password",operateor:"=",onerror:"两次密码不一致"});
-  $("#fullname").formValidator({onshow:"请输入全名",onfocus:"如：陈小明"}).inputValidator({min:6,max:20,onerror:"至少两个中文字"});
+  $("#username").formValidator({onshow:"请输入用户名，仅数字、字母",onfocus:"如：happycat"}).inputValidator({min:3,max:20,onerror:"至少三个字符"});
+  $("#lastname").formValidator({onshow:"请输入姓氏",onfocus:"如：陈"}).inputValidator({min:2,max:4,onerror:"至少一个中文字，至多两个中文字"});
+  $("#firstname").formValidator({onshow:"请输入名字",onfocus:"如：小明"}).inputValidator({min:2,max:4,onerror:"至少一个中文字，至多两个中文字"});
   $("#school_num").formValidator({onshow:"请输入学号",onfocus:"如：20170001"}).inputValidator({min:6,max:20,onerror:"输入有误"});
   $("#class_num").formValidator({onshow:"请输入班级",onfocus:"如：工科01班"}).inputValidator({min:2,max:10,onerror:"输入有误"});
   $("#email").formValidator({onshow:"请输入邮箱",onfocus:""}).inputValidator({min:6,max:20,onerror:"至少两个中文字"});

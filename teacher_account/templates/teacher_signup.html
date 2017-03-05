@@ -71,8 +71,14 @@
             <input type="text" name="work_id" id="work_id" class="form-control input-lg" placeholder="工号" tabindex="1">
           </div>         
           <div class="form-group">
-            <input type="text" name="full_name" id="full_name" class="form-control input-lg" placeholder="姓名" tabindex="1">
-          </div>                    
+            <input type="text" name="username" id="username" class="form-control input-lg" placeholder="用户名" tabindex="1">
+          </div>          
+          <div class="form-group">
+            <input type="text" name="lastname" id="lastname" class="form-control input-lg" placeholder="姓" tabindex="1">
+          </div>   
+          <div class="form-group">
+            <input type="text" name="firstname" id="firstname" class="form-control input-lg" placeholder="名字" tabindex="1">
+          </div>                  
 					<div class="form-group">
             <input type="text" name="gender" id="gender" class="form-control input-lg" placeholder="性别" tabindex="1">
 					</div>
@@ -201,7 +207,9 @@ $(function(){
   $.formValidator.initConfig({autotip:true,formid:"myform",onerror:function(msg){}});
   $("#password").formValidator({onshow:"请输入密码",onfocus:"密码应该为6-20位之间"}).inputValidator({min:6,max:20,onerror:"密码应该为6-20位之间"});
   $("#pwdconfirm").formValidator({onshow:"请输入确认密码",onfocus:"密码应该为6-20位之间",oncorrect:"密码一致"}).compareValidator({desid:"password",operateor:"=",onerror:"两次密码不一致"});
-  $("#full_name").formValidator({onshow:"请输入全名",onfocus:"如：陈小明"}).inputValidator({min:6,max:20,onerror:"至少两个中文字"});
+  $("#username").formValidator({onshow:"请输入用户名，仅数字、字母",onfocus:"如：happycat"}).inputValidator({min:3,max:20,onerror:"至少三个字符"});
+  $("#lastname").formValidator({onshow:"请输入姓氏",onfocus:"如：陈"}).inputValidator({min:2,max:4,onerror:"至少一个中文字，至多两个中文字"});
+  $("#firstname").formValidator({onshow:"请输入名字",onfocus:"如：小明"}).inputValidator({min:2,max:4,onerror:"至少一个中文字，至多两个中文字"});
   $("#work_id").formValidator({onshow:"请输入工号",onfocus:"如：20170001"}).inputValidator({min:6,max:20,onerror:"输入有误"});
   $("#gender").formValidator({onshow:"请输入性别",onfocus:"如：男"}).inputValidator({min:1,max:5,onerror:"输入有误"});
   $("#email").formValidator({onshow:"请输入邮箱",onfocus:""}).inputValidator({min:6,max:20,onerror:"至少两个中文字"});

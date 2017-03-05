@@ -71,10 +71,10 @@ from django.dispatch import receiver
 
 @python_2_unicode_compatible  # only if you need to support Python 2
 class Major(models.Model):
-    name = models.CharField(max_length=30, default="工学系")
+    name = models.CharField(max_length=30, default=u"工学系")
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
     class Meta:
         ordering = ('name',)
@@ -211,7 +211,7 @@ class Student(models.Model):
 
 
     def __str__(self):
-        return self.profile.name
+        return self.profile.username
 
     class Meta:
         ordering = ('profile','major', 'class_name')
