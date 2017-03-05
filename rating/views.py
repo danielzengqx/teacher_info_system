@@ -2,7 +2,7 @@
 # coding=gbk
 from __future__ import division 
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
-from models import Teacher2, RatingItem, ItemScore, RatingForTeacher
+from models import Teacher2, Profile, RatingItem, ItemScore, RatingForTeacher
 # Create your views here.
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_page
@@ -81,6 +81,17 @@ def rating(request):
 
 		return HttpResponseRedirect("/teacher_info/detail/%s" %tid)
 		# return test_cache(request)
+
+
+	profile = Profile.objects.get(user=request.user)
+
+
+	work_id = profile.work_id
+
+	# return HttpResponseRedirect('/')
+	if work_id:
+		return HttpResponse("评分功能只针对学生用户, 教师用户请返回")
+
 
 
 	teachers =  Teacher2.objects.all()

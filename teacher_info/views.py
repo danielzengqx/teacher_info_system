@@ -111,15 +111,20 @@ def teacher_detail(request, id):
 
 	template = "profile.html"
 
-	profile = Profile.objects.get(work_id=teacher.work_id)
+	try:
+		profile = Profile.objects.get(work_id=teacher.work_id)
+		email = profile.user.email
+	except Exception as e:
+		print lineno(), "Get Teacher Profile failed, Reason: ", e
+		email = "教师未完善该信息"
 
-	print "email ", profile.user.email
+	# print "email ", profile.user.email
 	score_total_percent = format(teacher.score_total/100,'.0%')
 	context = {	
 				"teacher": teacher,
 				"name": teacher.name,
 				"major": teacher.major,
-				"email": profile.user.email,
+				"email": email,
 				'count': teacher.rater_count,
 				"intro": teacher.intro,
 				"score_total": int(round(teacher.score_total, 1)),

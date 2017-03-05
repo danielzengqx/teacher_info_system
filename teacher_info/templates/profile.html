@@ -620,49 +620,8 @@ opacity:0.9;
 
 <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
  -->
- <div class="container">
+<div class="container">
 <div class="row">
-<!--     <div class="col-sm-3">
-        <a href="mail-compose.html" class="btn btn-danger btn-block btn-compose-email">Compose Email</a>
-        <ul class="nav nav-pills nav-stacked nav-email shadow mb-20">
-            <li class="active">
-                <a href="#mail-inbox.html">
-                    <i class="fa fa-inbox"></i> Inbox  <span class="label pull-right">7</span>
-                </a>
-            </li>
-            <li>
-                <a href="#mail-compose.html"><i class="fa fa-envelope-o"></i> Send Mail</a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-certificate"></i> Important</a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-file-text-o"></i> Drafts <span class="label label-info pull-right inbox-notification">35</span>
-                </a>
-            </li>
-            <li><a href="#"> <i class="fa fa-trash-o"></i> Trash</a></li>
-        </ul>
-
-        <h5 class="nav-email-subtitle">More</h5>
-        <ul class="nav nav-pills nav-stacked nav-email mb-20 rounded shadow">
-            <li>
-                <a href="#">
-                    <i class="fa fa-folder-open"></i> Promotions  <span class="label label-danger pull-right">3</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-folder-open"></i> Job list
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-folder-open"></i> Backup
-                </a>
-            </li>
-        </ul>
-    </div> -->
     <div class="col-sm-9">
         
         <!-- resumt -->
@@ -678,80 +637,61 @@ opacity:0.9;
                               
                            </div>
                         </div>
-                        <div class="col-xs-12 col-sm-8">
+
+<!--                         <div class="col-xs-12 col-sm-8">
                            <ul class="list-group">
-                              <li class="list-group-item"  >{{ name }} </li>
+                           <div>
+                              <label>名字：</label>
+                              <li class="list-group-item"  >                     
+                                {{ name }} </li>
+                                  <label>学院：</label>
                               <li class="list-group-item">{{ major }} </li>
-                              <!-- <li class="list-group-item"></li> -->
+                              <li class="list-group-item"></li>
+                              <label>邮箱：</label>
+                              <li class="list-group-item"><i class="fa fa-envelope"></i>{{ email }}</li>
+                              <label>电话：</label>
+
                               {% if teacher.phone %}
                               <li class="list-group-item"><i class="fa fa-phone"></i>{{ teacher.phone}}</li>
-                              {% endif %}
-                              
-                              <li class="list-group-item"><i class="fa fa-envelope"></i>{{ email }}</li>
+                              {% endif %}                              
                            </ul>
-                        </div>
+                        </div> -->
+
                      </div>
                   </div>
                </div>
+            </div>
+            
+               <div class="bs-callout bs-callout-danger">
+                  <h4>基本信息</h4>
+                  <p>
+                        <!-- <div class="col-xs-12 col-sm-8"> -->
+                           <ul class="list-group">
+                              <label>名字：</label>
+                              <li class="list-group-item"  >                     
+                                {{ name }} </li>
+                                  <label>学院：</label>
+                              <li class="list-group-item">{{ major }} </li>
+                              <!-- <li class="list-group-item"></li> -->
+                              <label>邮箱：</label>
+                              <li class="list-group-item"><i class="fa fa-envelope"></i>{{ email }}</li>
+                              <label>电话：</label>
+
+                              {% if teacher.phone %}
+                              <li class="list-group-item"><i class="fa fa-phone"></i>{{ teacher.phone}}</li>
+                              {% endif %}   
+                           </ul>
+                        <!-- </div> -->
+
+                  </p>
+               </div>
+
                <div class="bs-callout bs-callout-danger">
                   <h4>简介</h4>
                   <p>{{ intro }}
                   </p>
                </div>
-<!--                <div class="bs-callout bs-callout-danger">
-                  <h4>Research Interests</h4>
-                  <p>
-                     Software Engineering, Machine Learning, Image Processing,
-                     Computer Vision, Artificial Neural Networks, Data Science,
-                     Evolutionary Algorithms.
-                  </p>
-               </div> -->
-<!--                <div class="bs-callout bs-callout-danger">
-                  <h4>Prior Experiences</h4>
-                  <ul class="list-group">
-                     <a class="list-group-item inactive-link" href="#">
-                        <h4 class="list-group-item-heading">
-                           Software Engineer at Twitter
-                        </h4>
-                        <p class="list-group-item-text">
-                           Lorem ipsum dolor sit amet, ea vel prima adhuc, scripta liberavisse ea quo, te vel vidit mollis complectitur. Quis verear mel ne. Munere vituperata vis cu, 
-                           te pri duis timeam scaevola, nam postea diceret ne. Cum ex quod aliquip mediocritatem, mei habemus persecuti mediocritatem ei.
-                        </p>
-                     </a>
-                     <a class="list-group-item inactive-link" href="#">
-                        <h4 class="list-group-item-heading">Software Engineer at LinkedIn</h4>
-                        <p class="list-group-item-text">
-                           Lorem ipsum dolor sit amet, ea vel prima adhuc, scripta liberavisse ea quo, te vel vidit mollis complectitur. 
-                           Quis verear mel ne. Munere vituperata vis cu, te pri duis timeam scaevola, 
-                           nam postea diceret ne. Cum ex quod aliquip mediocritatem, mei habemus persecuti mediocritatem ei.
-                        </p>
-                        <ul>
-                           <li>
-                              Lorem ipsum dolor sit amet, ea vel prima adhuc, scripta liberavisse ea quo, te vel vidit mollis complectitur. 
-                              Quis verear mel ne. Munere vituperata vis cu, te pri duis timeam scaevola, 
-                              nam postea diceret ne. Cum ex quod aliquip mediocritatem, mei habemus persecuti mediocritatem ei.
-                           </li>
-                           <li>
-                              Lorem ipsum dolor sit amet, ea vel prima adhuc, scripta liberavisse ea quo, te vel vidit mollis complectitur. 
-                              Quis verear mel ne. Munere vituperata vis cu, te pri duis timeam scaevola, 
-                              nam postea diceret ne. Cum ex quod aliquip mediocritatem, mei habemus persecuti mediocritatem ei.
-                           </li>
-                        </ul>
-                        <p></p>
-                     </a>
-                  </ul>
-               </div> -->
-<!--                <div class="bs-callout bs-callout-danger">
-                  <h4>Key Expertise</h4>
-                  <ul class="list-group">
-                     <li class="list-group-item"> Lorem ipsum dolor sit amet, ea vel prima adhuc </li>
-                     <li class="list-group-item"> Lorem ipsum dolor sit amet, ea vel prima adhuc</li>
-                     <li class="list-group-item"> Lorem ipsum dolor sit amet, ea vel prima adhuc</li>
-                     <li class="list-group-item"> Lorem ipsum dolor sit amet, ea vel prima adhuc</li>
-                     <li class="list-group-item">Lorem ipsum dolor sit amet, ea vel prima adhuc</li>
-                     <li class="list-group-item"> Lorem ipsum dolor sit amet, ea vel prima adhuc</li>
-                  </ul>
-               </div> -->
+
                <div class="bs-callout bs-callout-danger">
                   <h4>总分 <small>评分人数 {{ count }}</small> </h4>
                   <ul class="list-group">
@@ -776,15 +716,14 @@ opacity:0.9;
                             <span class="star"><i class="glyphicon glyphicon-star"></i></span>
                           </span>
                           </div>
-
-                        <div class="caption">
-                          <span class="label label-success">{{ score_total }}分</span>
-                        </div>
+                          <div class="caption">
+                            <span class="label label-success">{{ score_total }}分</span>
+                          </div>
                       </div>
-
                      </a>
                   </ul>
                </div>
+
                <div class="bs-callout bs-callout-danger">
                   <h4>本学期担任课程</h4>
                   <table class="table table-striped table-responsive ">
@@ -811,6 +750,7 @@ opacity:0.9;
 
                   </table>
                </div>
+
             </div>
          </div>
         <!-- resume -->
