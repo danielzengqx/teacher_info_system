@@ -41,7 +41,7 @@ def rating(request):
 
 				print "teacher name: %s" %teacher.name
 
-				rating_item = RatingItem.objects.get(id=item_id)
+				rating_iditem = RatingItem.objects.get(id=item_id)
 				try:
 					item_score = ItemScore(item = rating_item, score=score, rater=user)
 					item_score.save()
@@ -125,7 +125,8 @@ def rating(request):
 
 
 def redirect(request):
-	template = "redirect.html"
+	print "here is redirect"
+	template = "redirect_nosignin.html"
 
 	context = {
 				}

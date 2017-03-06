@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from .models import Comment
 # Create your views here.
+from django.contrib.auth.decorators import login_required
+
+@login_required(login_url='/rating/redirect/')
 def comment(request):
 	template = "comment_simple.html"
 
@@ -24,3 +27,6 @@ def comment(request):
 
 
 	return render(request, template, context)
+
+
+

@@ -5,6 +5,7 @@ from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from rating.models import User, Profile, Teacher2, Student, Class, CourseForClass
 # Create your views here.
 import inspect
+from django.contrib.auth.decorators import login_required
 
 def lineno():
     """Returns the current line number in our program."""
@@ -14,6 +15,7 @@ def register(request):
 	template = "teacher_signup.html"
 
 	return render(request,template, context)
+
 
 
 
@@ -40,7 +42,7 @@ def success(request):
 
 	return HttpResponse("Success")	
 
-
+@login_required(login_url='/rating/redirect/')
 def setting(request):
 	template = "setting.html"
 
@@ -58,8 +60,8 @@ def setting(request):
 	elif school_num:
 		return HttpResponseRedirect("stu_page/%s" %school_num)			
 	else:
-		print lineno(), "Failed Reason, ", e
-		HttpResponse("不存在该资源, 请返回")
+		# print lineno(), "Failed Reason, ", e
+		return HttpResponse("不存在该资源, 请返回")
 
 def my_page(request, work_id):
 	template = "my_page.html"
@@ -93,7 +95,6 @@ def my_page(request, work_id):
 
 	return render(request,template, context)
 
-
 def edit_page(request, work_id):
 	if request.POST:
 		print request.POST
@@ -121,7 +122,6 @@ def edit_page(request, work_id):
 
 
 	return render(request,template, context)
-
 
 def change_profile(request, work_id):
 	if request.POST:
@@ -206,12 +206,12 @@ def stu_page(request, school_num):
 
 
 
+def redirect(request):
+	print "here is redirect"
+	template = "redirect_nosignin.html"
 
-
-
-
-
-
+	context = {
+				}
 
 
 
