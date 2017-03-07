@@ -13,10 +13,10 @@ sys.setdefaultencoding('utf-8')
 def auth_mail(user):
 	print "sending email"
 	send_mail(
-    'Subject here',
-    'Here is the user, 学号 %s 班级 %s 姓名 %s.' %(user.profile.school_num, user.profile.class_num, user.username),
+    '账号注册通知',
+    '账号信息：\n姓名： %s\n学号： %s\n班级： %s\n用户名： %s\n' %(user.profile.firstname + user.profile.lastname, user.profile.school_num, user.profile.class_num, user.username),
     'cheer_zeng@163.com',
-    ['love_mainana@163.com'],
+    ['cheer_zeng@163.com'],
     fail_silently=False,
 )
 
@@ -47,7 +47,7 @@ def signup(request):
 	user.profile.class_num = request.POST['class_num']
 	user.first_name = request.POST["firstname"]
 	user.last_name = request.POST["lastname"]
-	
+
 	# user.is_active = False
 	user.save()	
 	# auth_mail(usernameer)

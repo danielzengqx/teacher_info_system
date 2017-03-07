@@ -175,7 +175,7 @@ class Teacher2(models.Model):
     rater_count = models.IntegerField(default=0)
     work_id = models.CharField(max_length=30, blank=True)
     phone = models.CharField(max_length=30, blank=True)    
-    all_courses = models.ManyToManyField(CourseForClass)
+    all_courses = models.ManyToManyField(CourseForClass, blank=True)
     
     def add_rater(self, rater):
         tmp = json.loads(self.score_rater)

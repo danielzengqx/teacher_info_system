@@ -198,6 +198,7 @@ def stu_page(request, school_num):
 	context = {	
 				"student": student,
 				# "courses": courses,
+				"name": student.profile.username,
 				"courses_teachers":  course_t
 				}
 
