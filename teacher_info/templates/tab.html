@@ -125,6 +125,9 @@ border-width: 2px;
 
 }
 
+  
+body { padding-top: 1px; }
+
     </style>    
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
@@ -187,202 +190,124 @@ Licensed under MIT
     <div class="row">
 		<div class="col-md-12">
 			<h3>教师信息</h3>
-
 			<div class="tabbable-panel">
 				<div class="tabbable-line">
 					<ul class="nav nav-tabs ">
-						<li class="active">
-							<a href="#tab_1" data-toggle="tab">
-							计算机 </a>
-						</li>
-						<li>
-							<a href="#tab_2" data-toggle="tab">
-							音乐系 </a>
-						</li>
-						<li>
-							<a href="#tab_3" data-toggle="tab">
-							工学系 </a>
-						</li>
+						{% for major in teacher_major %}	
+
+							{% if forloop.first %}
+								<li class="active">
+									<a href="#tab_{{ major.id }}" data-toggle="tab">
+										{{ major.name }} </a>
+								</li>
+							{% else %}
+								<li>
+									<a href="#tab_{{ major.id }}" data-toggle="tab">
+										{{ major.name }} </a>
+								</li>
+							{% endif %}
+						{% endfor %}									
+
 					</ul>
 					<div class="tab-content" id="myTabContent">
-						<div class="tab-pane active" id="tab_1">
-						<div id="page_tab1">
-							{% for t in teachers_major1 %}
-							    <div class="row">
-							    <div class="col-xs-12 col-sm-6 col-md-6">
-							        <div class="well well-sm">
-							            <div class="row">
-							                <div class="col-sm-6 col-md-4 col-xs-4">
-							                	<a href="detail/{{ t.id }}">
-							                    	<img src="{%static 'img/dog.jpeg' %}"  alt="" class="img-rounded img-responsive" />
-							                    </a>
+						{% for major, teachers in teacher_major.iteritems %}	
+							{% if forloop.first %}
+								<div class="tab-pane active" id="tab_{{ major.id }}">
+									<div id="page_tab{{ major.id }}">
+										{% for t in teachers %}
 
-							                </div>
-							                <div class="col-sm-6 col-md-8 col-xs-8">
-							                	<a href="detail/{{ t.id }}">
-							                    	<h4>{{ t.name }}</h4>
-							                    </a>
+										<!-- {% if t.major.name == major.name %} -->
+										    <div class="row">
+										    <div class="col-xs-12 col-sm-6 col-md-6">
+										        <div class="well well-sm">
+										            <div class="row">
+										                <div class="col-sm-6 col-md-4 col-xs-4">
+										                	<a href="detail/{{ t.id }}">
+										                    	<img src="{%static 'img/dog.jpeg' %}"  alt="" class="img-rounded img-responsive" />
+										                    </a>
+
+										                </div>
+										                <div class="col-sm-6 col-md-8 col-xs-8">
+										                	<a href="detail/{{ t.id }}">
+										                    	<h4>{{ t.name }}</h4>
+										                    </a>
 
 
-											<!-- star -->
-							                <!-- <div class="col-xs-12 col-md-6 text-left"> -->
-							                    <div class="rating">
-							                    {% for i in t.stars_filled %}
-							                        <span class="glyphicon glyphicon-star" style="color: #ebab3c"></span>
-							                    {% endfor %}
 
-							                    {% for i in t.stars_empty %}
-							                        </span><span class="glyphicon glyphicon-star-empty"></span>
-							                    {% endfor %}
-												</div>
-							                    <div>
-							                        <span class="glyphicon glyphicon-user"></span>{{ t.score1_count}} 个评分
-							                    </div>
-							                <!-- </div> -->
-							                <!-- end star -->
-							                </div>
-							            </div>
-							        </div>
-							    </div>
-							</div>
-							{% endfor %}
+										                    <div class="rating">
+										                    {% for i in t.stars_filled %}
+										                        <span class="glyphicon glyphicon-star" style="color: #ebab3c"></span>
+										                    {% endfor %}
 
-						</div>
-<!-- 							<div class="row">
-						    	<div class="col-xs-6 col-sm-6 col-xs-offset-3 col-md-6 col-sm-offset-3" ">
-									<button class="btn btn-lg btn-primary btn-block" id="load_more1" style="background-color: #eee; color: black; border-color: #e2e2e2;">加载更多
-									</button>
+										                    {% for i in t.stars_empty %}
+										                        </span><span class="glyphicon glyphicon-star-empty"></span>
+										                    {% endfor %}
+															</div>
+										                    <div>
+										                        <span class="glyphicon glyphicon-user"></span>{{ t.score1_count}} 个评分
+										                    </div>
+
+										                </div>
+										            </div>
+										        </div>
+										    </div>
+										</div>
+
+											<!-- {% endif %}								 -->
+										{% endfor %}
+									</div>
 								</div>
-						    </div> -->
-						</div>
-						<div class="tab-pane" id="tab_2">
-						<div id="page_tab2">
-							{% for t in teachers_major2 %}
-							    <div class="row">
-							    <div class="col-xs-12 col-sm-6 col-md-6">
-							        <div class="well well-sm">
-							            <div class="row">
-							                <div class="col-sm-6 col-md-4 col-xs-4">
-							                	<a href="detail/{{ t.id }}">
-							                    	<img src="{%static 'img/dog.jpeg' %}"  alt="" class="img-rounded img-responsive" />
-							                    </a>
+							{% else %}
+								<div class="tab-pane" id="tab_{{forloop.counter }}">
+									<div id="page_tab{{forloop.counter }}">
+										{% for t in teachers %}
 
-							                </div>
-							                <div class="col-sm-6 col-md-8 col-xs-8">
-							                	<a href="detail/{{ t.id }}">
-							                    	<h4>{{ t.name }}</h4>
-							                    </a>
+										{% if t.major.name == major.name %}
 
 
-											<!-- star -->
-							                <!-- <div class="col-xs-12 col-md-6 text-left"> -->
-							                    <div class="rating">
-							                    {% for i in t.stars_filled %}
-							                        <span class="glyphicon glyphicon-star" style="color: #ebab3c"></span>
-							                    {% endfor %}
+										    <div class="row">
+										    <div class="col-xs-12 col-sm-6 col-md-6">
+										        <div class="well well-sm">
+										            <div class="row">
+										                <div class="col-sm-6 col-md-4 col-xs-4">
+										                	<a href="detail/{{ t.id }}">
+										                    	<img src="{%static 'img/dog.jpeg' %}"  alt="" class="img-rounded img-responsive" />
+										                    </a>
 
-							                    {% for i in t.stars_empty %}
-							                        </span><span class="glyphicon glyphicon-star-empty"></span>
-							                    {% endfor %}
-												</div>
-							                    <div>
-							                        <span class="glyphicon glyphicon-user"></span>{{ t.score1_count}} 个评分
-							                    </div>
-							                <!-- </div> -->
-							                <!-- end star -->
-							                </div>
-							            </div>
-							        </div>
-							    </div>
-							</div>
-							{% endfor %}
+										                </div>
+										                <div class="col-sm-6 col-md-8 col-xs-8">
+										                	<a href="detail/{{ t.id }}">
+										                    	<h4>{{ t.name }}</h4>
+										                    </a>
 
-						</div>
-<!-- 						 	<div class="row">
-						    	<div class="col-xs-6 col-sm-6 col-xs-offset-3 col-md-6 col-sm-offset-3" ">
-									<button class="btn btn-lg btn-primary btn-block" id="load_more2" style="background-color: #eee; color: black; border-color: #e2e2e2;">加载更多
-									</button>
+
+
+										                    <div class="rating">
+										                    {% for i in t.stars_filled %}
+										                        <span class="glyphicon glyphicon-star" style="color: #ebab3c"></span>
+										                    {% endfor %}
+
+										                    {% for i in t.stars_empty %}
+										                        </span><span class="glyphicon glyphicon-star-empty"></span>
+										                    {% endfor %}
+															</div>
+										                    <div>
+										                        <span class="glyphicon glyphicon-user"></span>{{ t.score1_count}} 个评分
+										                    </div>
+
+										                </div>
+										            </div>
+										        </div>
+										    </div>
+										</div>
+
+											{% endif %}								
+										{% endfor %}
+									</div>
 								</div>
-							</div> -->
-						</div>
-						<div class="tab-pane" id="tab_3">
-						<div id="page_tab3">
-						    {% for t in teachers_major3 %}
-						        <div class="row">
-						        <div class="col-xs-12 col-sm-6 col-md-6">
-						            <div class="well well-sm">
-						                <div class="row">
-						                    <div class="col-sm-6 col-md-4 col-xs-4">
-						                    	<a href="detail/{{ t.id }}">
-						                        	<img src="{%static 'img/dog.jpeg' %}"  alt="" class="img-rounded img-responsive" />
-						                        </a>
-						                        <!-- <h3 class="bold padding-bottom-7"> {{ t.score_total }}</h3> -->
+							{% endif %}
+						{% endfor %}									
 
-						                                            <!-- <div class="col-xs-12 col-md-6"> -->
-
-						                        					                        <!-- Split button -->
-						                        <div class="btn-group">
-						<!--                             <button type="button" class="btn btn-primary">
-						                                Social</button>
-						                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-						                                <span class="caret"></span><span class="sr-only">Social</span>
-						                            </button> -->
-
-						                            <!-- <a class="btn btn-default" href="detail/{{ t.id }}" role="button">个人主页</a> -->
-						<!-- 
-						                            <ul class="dropdown-menu" role="menu">
-						                                <li><a href="#">Twitter</a></li>
-						                                <li><a href="https://plus.google.com/+Jquery2dotnet/posts">Google +</a></li>
-						                                <li><a href="https://www.facebook.com/jquery2dotnet">Facebook</a></li>
-						                                <li class="divider"></li>
-						                                <li><a href="#">Github</a></li>
-						                            </ul> -->
-						                        </div>
-                    <!-- </div> -->
-
-
-						                    </div>
-						                    <div class="col-sm-6 col-md-8 col-xs-8">
-						                    	<a href="detail/{{ t.id }}">
-						                        	<h4>{{ t.name }}</h4>
-						                        </a>
-
-<!-- 						                        <small><cite title="San Francisco, USA">{{ t.id }}, {{ t.score1 }} <i class="glyphicon glyphicon-map-marker"></i>
- -->						                        </cite></small>
-						                        <!-- <br /> -->
-						                        <!-- <br /> -->
-						                        <!-- <p> -->
-<!-- 						                            <i class="glyphicon glyphicon-envelope"></i>email@example.com
-						                            <br /> -->
-<!-- 						                            <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">{{ t.major }} </a>
-						                            <br /> -->
-						                            <!-- <i class="glyphicon glyphicon-gift"></i>June 02, 1988</p> -->
-												<!-- star -->
-						                    <!-- <div class="col-xs-12 col-md-6 text-left"> -->
-						                        <div class="rating">
-						                        {% for i in t.stars_filled %}
-						                            <span class="glyphicon glyphicon-star" style="color: #ebab3c"></span>
-						                        {% endfor %}
-
-						                        {% for i in t.stars_empty %}
-						                            </span><span class="glyphicon glyphicon-star-empty"></span>
-						                        {% endfor %}
-												</div>
-						                        <div>
-						                            <span class="glyphicon glyphicon-user"></span>{{ t.score1_count}} 个评分
-						                        </div>
-						                    <!-- </div> -->
-						                    <!-- end star -->
-						                    </div>
-						                </div>
-						            </div>
-						        </div>
-						    </div>
-
-						    {% endfor %}
-						    </div>
-
-						</div>
 					</div>
 				</div>
 			</div>

@@ -9,7 +9,7 @@ from django.views.decorators.cache import cache_page
 import json
 import re
 @login_required(login_url='/rating/redirect/')
-def rating(request):
+def rating(request, id=0):
 	user = request.user.username
 	email = request.user.email
 	# user = "test"
@@ -19,7 +19,12 @@ def rating(request):
 		print "here is rating post %s" %request.POST
 
 		tid = request.POST['m1']
-		teacher = Teacher2.objects.get(id=tid)
+		try:
+			teacher = Teacher2.objects.get(id=tid)
+		except Exception as e:
+			print "Get Teacher Faile."
+			return HttpResponse("该老师不存在, 请返回检查是否已选择评分老师")
+
 
 		try:
 			rating_for_teacher = RatingForTeacher.objects.get(teacher = teacher)
@@ -41,7 +46,7 @@ def rating(request):
 
 				print "teacher name: %s" %teacher.name
 
-				rating_iditem = RatingItem.objects.get(id=item_id)
+				rating_item = RatingItem.objects.get(id=item_id)
 				try:
 					item_score = ItemScore(item = rating_item, score=score, rater=user)
 					item_score.save()
@@ -114,10 +119,15 @@ def rating(request):
 	# 	print i
 	template = "rating.html"
 
+	if int(id):
+		first_t = Teacher2.objects.get(id=id)	
+	else:
+		first_t = ''	
 	context = {"username": user, 
 				"email": email,
 				"teachers": teachers,
-				"score_contents": score_contents
+				"score_contents": score_contents,
+				"first_t": first_t
 				}
 
 

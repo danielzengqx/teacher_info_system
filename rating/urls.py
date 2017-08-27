@@ -19,6 +19,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$',views.rating, name='rating'),
+    url(r'^(?P<id>\d+)$',views.rating, name='rating'),
     url(r'^redirect',views.redirect, name='redirect'),
     url(r'^success_redirect/(?P<tid>\d+)',views.success_redirect, name='success_redirect'),
     url(r'^check_rater/(?P<tid>\d+)',views.check_rater, name='check_rater'),

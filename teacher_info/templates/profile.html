@@ -519,6 +519,9 @@ opacity:0.9;
                         
 /**** resume ****/
 
+  
+  body { padding-top: 1px; }
+
 </style>
         <script src="{% static 'js/jquery.min.js' %}"></script>
 
@@ -662,7 +665,7 @@ opacity:0.9;
                       </div>
                      </a>
                   </ul>
-                               <div class=".col-xs-6 .col-sm-4 .col-md-2 .col-md-offset-8 .col-sm-offset-8"><a href="/rating" class="btn btn-success btn-xs">去评分</a></div>  
+                               <div class=".col-xs-6 .col-sm-4 .col-md-2 .col-md-offset-8 .col-sm-offset-8"><a href="/rating/{{teacher.id}}" class="btn btn-success btn-xs">去评分</a></div>  
                </div>
 
                <div class="bs-callout bs-callout-danger">

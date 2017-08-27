@@ -2,42 +2,38 @@
 # coding=gbk
 from __future__ import division
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
-from rating.models import Teacher2, RatingForTeacher, Profile
+from rating.models import Teacher2, RatingForTeacher, Profile, Major
 # Create your views here.
 from django.contrib.auth.decorators import login_required
 import inspect
-
+import os, subprocess
 def lineno():
     """Returns the current line number in our program."""
     return inspect.currentframe().f_back.f_lineno
 
 def load_more(request, tab=1, page=0):
-	teachers =  Teacher2.objects.all()
-	teachers_major1 = list()
-	teachers_major2 = list()
-	teachers_major3 = list()
-	for t in teachers:
-		if t.major == u"计算机":
-			# print "here is teacher %s, name %s, major %s" %(t.tid, t.name, t.major)
-			teachers_major1.append(t)
-		elif t.major == u"音乐系":
-			# print "here is teacher %s, name %s, major %s" %(t.tid, t.name, t.major)
-			teachers_major2.append(t)
-		else:
-			teachers_major3.append(t)
-
-	# template = "teacher_info.html"
-	# template = "teacher_widget.html"
-	# template = "profile.html"
-	# template = "user_profile.html"
+	print os.getcwd()
+	os.system("cp /home/daniel/teacher/teacher_info_system/teacher_info/templates/page_tab1.html /home/daniel/teacher/teacher_info_system/rating/templates/page_tab%s.html" %tab)
 	template = "page_tab%s.html" %tab
-	print template
-	print teachers_major3
 	page = int(page)
+
+	teacher_major = dict()
+	major = Major.objects.get(id=tab)
+	print lineno(), major
+	print lineno(), page
+
+	teacher_major[major] = list()
+	teachers = list()
+	count = 0		
+	for teacher in Teacher2.objects.filter(major=major)[:(page+1)*10]:
+		if teacher.major.name == major.name:
+			teachers.append(teacher)
+			count += 1
+
+	print teachers
 	context = {
-				"teachers_major1": teachers_major1[:(page+1)*10],
-				"teachers_major2": teachers_major2[:(page+1)*10],
-				"teachers_major3": teachers_major3[:(page+1)*10]
+				"teachers": teachers,
+				"teacher_major": teacher_major			
 				}
 
 
@@ -50,7 +46,7 @@ def teacher_init():
 	for t in teachers:
 		# print "count %s type %s, star" %(t.score1_count, type(t.score1_count))
 		if t.score_total == 0:
-			print "equals zero"
+			# print "equals zero"
 			t.stars_filled = ''
 			t.stars_empty = 'xxxxx'
 			t.save()
@@ -78,13 +74,28 @@ def teacher_info(request, page=0):
 	# template = "user_profile.html"
 	template = "tab.html"
 
-	print teachers_major3
+	teacher_major = dict()
+	for major in Major.objects.all():
+		teacher_major[major] = list()
+		count = 0		
+		for teacher in Teacher2.objects.all():
+			if teacher.major.name == major.name and count < 10:
+				teacher_major[major].append(teacher)
+				count += 1
+
+
+
+	print teacher_major
 	page = int(page)
+
+
 	context = {
 				"teachers_major1": teachers_major1[page*10:(page+1)*10],
 				"teachers_major2": teachers_major2[page*10:(page+1)*10],
-				"teachers_major3": teachers_major3[page*10:(page+1)*10]
-
+				"teachers_major3": teachers_major3[page*10:(page+1)*10],
+				"majors": Major.objects.all(),
+				"teachers": Teacher2.objects.all()[page*10:(page+1)*10],
+				"teacher_major": teacher_major
 
 				}
 
@@ -123,7 +134,7 @@ def teacher_detail(request, id):
 
 	ranking = 1
 	for t in Teacher2.objects.all():
-		if t.score_total < teacher.score_total:
+		if t.score_total > teacher.score_total:
 			ranking += 1
 
 	context = {	
